@@ -10,8 +10,18 @@
 <meta property="og:description" content="Bro texts you from a real number. No app to open, no notification to swipe away.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://textsfrombro.com">
+<meta property="og:image" content="https://textsfrombro.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://textsfrombro.com/og-image.png">
 <meta name="theme-color" content="#F2F2F7">
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon-512.png" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<script defer src="/_vercel/insights/script.js"></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -270,7 +280,7 @@
 
 <nav class="nav" id="nav">
   <div class="mark">bro<i>.</i></div>
-  <a class="btn" href="#join">Get on the list</a>
+  <a class="btn" href="#join">Sign up for beta</a>
 </nav>
 
 <!-- HERO -->
@@ -398,7 +408,9 @@
            autocomplete="tel" inputmode="tel" aria-label="Mobile number">
     <input type="email" id="email" name="email" placeholder="email (optional)"
            autocomplete="email" inputmode="email" aria-label="Email address, optional">
-    <button class="btn-lg" type="submit" id="joinBtn">Join</button>
+    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"
+           aria-hidden="true" style="display:none">
+    <button class="btn-lg" type="submit" id="joinBtn">Join beta</button>
   </form>
 
   <label class="consent" for="consent">
