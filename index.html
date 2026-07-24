@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Texts From Bro — delete your reminder apps</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Texts From Bro</title>
 <meta name="description" content="Bro texts you from a real number. No app to open, no notification to swipe away.">
 
 <meta property="og:title" content="Texts From Bro">
@@ -15,621 +15,337 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://textsfrombro.com/og-image.png">
-<meta name="theme-color" content="#F2F2F7">
+<meta name="theme-color" content="#000000">
 
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon-512.png" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-<script defer src="/_vercel/insights/script.js"></script>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script defer src="/_vercel/insights/script.js"></script>
 <style>
   :root{
-    --paper:#F2F2F7;
-    --paper-2:#E8E8ED;
-    --ink:#0A0A0B;
-    --ink-soft:#54545A;
+    --bg:#000000;
     --bubble:#30D158;
-    --amber:#FF9F0A;
-    --hot:#FF3B30;
-    --gray:#E4E4E9;
-    --line:#D3D3DA;
-    --stamp:#8E8E93;
-    --sys: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    --gray:#26262A;
+    --gray-txt:#EDEDEF;
+    --ink:#0A0A0B;
+    --dim:#8A8A90;
+    --line:#1C1C1F;
+    --sys:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
   }
   *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
+  html,body{margin:0;height:100%}
   body{
-    margin:0; background:var(--paper); color:var(--ink);
-    font-family:Archivo, system-ui, sans-serif;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
+    background:var(--bg);color:#fff;
+    font-family:var(--sys);-webkit-font-smoothing:antialiased;
+    overflow:hidden;
   }
-  .wrap{max-width:1120px;margin:0 auto;padding:0 28px}
 
-  /* ---------- type ---------- */
-  h1,h2,.display{font-family:"Archivo Black",Archivo,sans-serif;font-weight:400;letter-spacing:-.035em;line-height:.92;text-transform:uppercase;margin:0}
-  h1{font-size:clamp(2.1rem,7.8vw,6.4rem)}
-  h2{font-size:clamp(1.9rem,5.4vw,4rem)}
-  .eyebrow{
-    font-size:11.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
-    color:var(--ink-soft);margin:0 0 22px;
-  }
-  .lede{font-size:clamp(1.02rem,1.7vw,1.3rem);line-height:1.5;color:var(--ink-soft);max-width:46ch;margin:26px 0 0}
-  .lede b{color:var(--ink);font-weight:700}
-
-  /* ---------- nav ---------- */
-  .nav{
-    position:fixed;top:0;left:0;right:0;z-index:60;
-    display:flex;align-items:center;justify-content:space-between;
-    padding:16px 28px;background:rgba(242,242,247,.82);backdrop-filter:blur(14px);
-    border-bottom:1px solid transparent;transition:border-color .3s;
-  }
-  .nav.stuck{border-bottom-color:var(--line)}
-  .mark{
+  .app{
+    display:flex;flex-direction:column;
+    height:100dvh;max-width:520px;margin:0 auto;
     position:relative;
-    font-family:"Archivo Black";font-size:22px;letter-spacing:-.04em;text-transform:lowercase;
-    background:var(--bubble);color:var(--ink);line-height:1;display:inline-block;
-    padding:9px 16px 10px 15px;border-radius:19px;border-bottom-left-radius:2px;
-    margin-left:8px;
   }
-  .mark::after{
-    content:"";position:absolute;left:-9px;bottom:0;width:16px;height:20px;
+
+  /* ---------- top bar ---------- */
+  .bar{
+    flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;
+    padding:calc(env(safe-area-inset-top) + 14px) 20px 12px;
+    border-bottom:1px solid var(--line);
+  }
+  .who{display:flex;align-items:center;gap:11px}
+  .who__badge{
+    position:relative;font-family:"Archivo Black";font-size:15px;letter-spacing:-.04em;
+    text-transform:lowercase;background:var(--bubble);color:var(--ink);line-height:1;
+    padding:7px 12px 8px 11px;border-radius:15px;border-bottom-left-radius:2px;margin-left:6px;
+  }
+  .who__badge::after{
+    content:"";position:absolute;left:-6px;bottom:0;width:12px;height:15px;
     background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 20'%3E%3Cpath d='M16 4 C16 12 13 17.5 8 19.4 C5 20.4 2 20.2 0 20 L16 20 Z' fill='%2330D158'/%3E%3C/svg%3E") no-repeat left bottom;
-    background-size:16px 20px;pointer-events:none;
+    background-size:12px 15px;
   }
-  .mark i{color:var(--ink);font-style:normal;margin-left:3px}
-  .nav a.btn{font-size:13px;font-weight:700;padding:9px 16px;border-radius:100px;background:var(--ink);color:var(--paper);text-decoration:none}
-
-  /* ---------- hero ---------- */
-  .hero{padding-top:170px;padding-bottom:90px;display:grid;grid-template-columns:1fr 320px;gap:60px;align-items:center}
-  .hero__cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px;align-items:center}
-  .btn-lg{
-    font-family:Archivo;font-size:15px;font-weight:700;letter-spacing:-.01em;
-    padding:15px 26px;border-radius:100px;border:none;cursor:pointer;
-    background:var(--ink);color:var(--paper);text-decoration:none;display:inline-block;
-    transition:transform .18s ease, opacity .18s ease;
-  }
-  .btn-lg:hover{transform:translateY(-2px)}
-  .btn-lg[disabled]{opacity:.5;cursor:default;transform:none}
-  .hero__note{font-size:13px;color:var(--ink-soft);display:flex;align-items:center;gap:7px}
-  .dot{width:7px;height:7px;border-radius:50%;background:var(--bubble);display:inline-block;
+  .who__meta{display:flex;flex-direction:column;line-height:1.15}
+  .who__name{font-size:15px;font-weight:700}
+  .who__status{font-size:11.5px;color:var(--bubble);display:flex;align-items:center;gap:5px}
+  .who__status i{width:6px;height:6px;border-radius:50%;background:var(--bubble);display:inline-block;
     box-shadow:0 0 0 0 rgba(48,209,88,.6);animation:pulse 2.2s infinite}
-  @keyframes pulse{
-    0%{box-shadow:0 0 0 0 rgba(48,209,88,.55)}
-    70%{box-shadow:0 0 0 9px rgba(48,209,88,0)}
-    100%{box-shadow:0 0 0 0 rgba(48,209,88,0)}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(48,209,88,.5)}70%{box-shadow:0 0 0 7px rgba(48,209,88,0)}100%{box-shadow:0 0 0 0 rgba(48,209,88,0)}}
+
+  .menu-btn{
+    appearance:none;background:none;border:none;cursor:pointer;padding:8px;margin:-8px;
+    display:flex;flex-direction:column;gap:4px;
+  }
+  .menu-btn span{width:22px;height:2px;background:#fff;border-radius:2px;transition:.25s}
+  .menu-btn:hover span{background:var(--bubble)}
+
+  /* ---------- messages ---------- */
+  .stream{
+    flex:1 1 auto;overflow-y:auto;padding:22px 20px 8px 26px;
+    display:flex;flex-direction:column;gap:8px;
+    -webkit-overflow-scrolling:touch;
+  }
+  .row{display:flex;opacity:0;transform:translateY(8px) scale(.98);
+    transition:opacity .3s ease, transform .38s cubic-bezier(.2,.9,.3,1);transform-origin:left bottom}
+  .row.in{opacity:1;transform:none}
+  .row.me{justify-content:flex-end;transform-origin:right bottom}
+  .bubble{
+    position:relative;
+    font-size:16.5px;line-height:1.34;padding:11px 16px;border-radius:21px;max-width:82%;
+  }
+  .row.bro .bubble{background:var(--bubble);color:#fff;border-bottom-left-radius:3px}
+  .row.me  .bubble{background:var(--gray);color:var(--gray-txt);border-bottom-right-radius:3px}
+  /* sharper iMessage tail on Bro's bubbles, matching the logo */
+  .row.bro .bubble::after{
+    content:"";position:absolute;left:-5px;bottom:0;width:18px;height:20px;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 22'%3E%3Cpath d='M18 4 L18 20 L3 20 C4 20 5.5 19.6 7 18.8 C11 16.5 15 11 18 4 Z' fill='%2330D158'/%3E%3C/svg%3E") no-repeat left bottom;
+    background-size:18px 20px;pointer-events:none;
+  }
+  .row.me .bubble::after{
+    content:"";position:absolute;right:-5px;bottom:0;width:18px;height:20px;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 22'%3E%3Cpath d='M2 4 L2 20 L17 20 C16 20 14.5 19.6 13 18.8 C9 16.5 5 11 2 4 Z' fill='%2326262A'/%3E%3C/svg%3E") no-repeat right bottom;
+    background-size:18px 20px;pointer-events:none;
   }
 
-  /* ---------- phone / thread ---------- */
-  .phone{
-    border:1px solid var(--line);border-radius:26px;background:#fff;padding:16px 14px;
-    box-shadow:0 24px 50px -30px rgba(10,10,11,.35);
-  }
-  .phone__hdr{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);
-    text-align:center;padding-bottom:12px;border-bottom:1px solid var(--paper-2);margin-bottom:6px;font-weight:700}
-  .thread{display:flex;flex-direction:column;gap:7px;position:relative}
-
-  /* iOS-style time separator */
-  .tstamp{
-    align-self:center;font-family:var(--sys);font-size:11px;color:var(--stamp);
-    letter-spacing:.01em;margin:9px 0 3px;
-  }
-  .tstamp b{font-weight:600;color:var(--stamp)}
-
-  .b{
-    font-family:var(--sys);font-size:15px;line-height:1.32;
-    padding:9px 14px;border-radius:19px;max-width:80%;width:fit-content;
-  }
-  .b--out{background:var(--bubble);color:#fff;align-self:flex-start;border-bottom-left-radius:6px}
-  .b--in{background:var(--gray);color:var(--ink);align-self:flex-end;border-bottom-right-radius:6px}
-
-  /* looping reveal */
-  .thread--live .b,
-  .thread--live .tstamp{opacity:0;transform:translateY(7px) scale(.97);transform-origin:left bottom}
-  .thread--live .tstamp{transform:translateY(4px);transform-origin:center}
-  .thread--live .b.in,
-  .thread--live .tstamp.in{opacity:1;transform:none;transition:opacity .28s ease, transform .34s cubic-bezier(.2,.9,.3,1)}
-  .thread--live .b--in.in{transform-origin:right bottom}
-  .typing{
-    position:absolute;left:0;display:none;background:var(--gray);border-radius:19px;
-    padding:11px 15px;gap:4px;z-index:2;
-  }
-  .typing.on{display:flex}
-  .typing i{width:6px;height:6px;border-radius:50%;background:#9A9AA2;display:block;animation:blip 1.1s infinite}
+  .typing .bubble{background:var(--bubble);padding:14px 17px;display:flex;gap:4px}
+  .typing i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.85);display:block;animation:blip 1.1s infinite}
   .typing i:nth-child(2){animation-delay:.16s}
   .typing i:nth-child(3){animation-delay:.32s}
-  @keyframes blip{0%,60%,100%{opacity:.35;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+  @keyframes blip{0%,60%,100%{opacity:.4;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
 
-  /* ---------- the scroll piece ---------- */
-  .reel{position:relative;height:500vh}
-  .reel__sticky{
-    position:sticky;top:0;height:100vh;overflow:hidden;
-    background:radial-gradient(62% 48% at 56% 50%, #fff 0%, var(--paper) 64%, var(--paper-2) 100%);
+  /* ---------- reply dock ---------- */
+  .dock{
+    flex:0 0 auto;padding:10px 16px calc(env(safe-area-inset-bottom) + 16px);
+    border-top:1px solid var(--line);
+    display:flex;flex-direction:column;gap:9px;min-height:78px;justify-content:center;
   }
-  .chain{
-    position:absolute;left:280px;right:0;top:0;margin:0 auto;
-    width:100%;max-width:560px;padding:0 30px;
-    display:flex;flex-direction:column;align-items:flex-start;gap:13px;
-    will-change:transform;
+  .choices{display:flex;flex-direction:column;gap:9px;opacity:0;transition:opacity .3s ease}
+  .choices.show{opacity:1}
+  .choice{
+    appearance:none;font-family:var(--sys);font-size:16px;font-weight:500;
+    padding:13px 18px;border-radius:100px;cursor:pointer;text-align:left;
+    background:transparent;color:#fff;border:1.5px solid #3A3A40;transition:.16s;
   }
-  .msg{
-    font-family:var(--sys);font-size:21px;line-height:1.32;
-    padding:14px 21px;border-radius:25px;color:#fff;
-    max-width:82%;width:fit-content;
-    box-shadow:0 14px 30px -20px rgba(10,10,11,.4);
-    will-change:opacity;
-  }
-  .msg[data-who="me"]{background:var(--gray)!important;color:var(--ink);align-self:flex-end;border-bottom-right-radius:8px}
-  .msg[data-who="bro"]{border-bottom-left-radius:8px}
-  .msg.grp{margin-top:78px}
+  .choice:hover{border-color:var(--bubble);color:var(--bubble)}
+  .choice:active{transform:scale(.985)}
 
-  .tone{position:absolute;left:34px;top:50%;transform:translateY(-50%);z-index:6;width:222px}
-  .tone__steps{display:flex;flex-direction:column;gap:11px;margin-bottom:20px}
-  .tone__step{
-    font-family:"Archivo Black";font-size:26px;letter-spacing:-.035em;text-transform:uppercase;
-    color:#C9C9D0;transition:color .4s ease, transform .4s cubic-bezier(.2,.9,.3,1);
-    transform-origin:left center;line-height:1;
+  /* the terminal CTA */
+  .cta{
+    appearance:none;font-family:var(--sys);font-size:17px;font-weight:700;
+    padding:16px 22px;border-radius:100px;cursor:pointer;border:none;
+    background:var(--bubble);color:var(--ink);text-decoration:none;text-align:center;
+    display:flex;align-items:center;justify-content:center;gap:9px;
+    box-shadow:0 8px 24px -10px rgba(48,209,88,.7);transition:transform .16s ease;
   }
-  .tone__step.on{transform:scale(1.14)}
-  .tone__step[data-t="0"].on{color:var(--bubble)}
-  .tone__step[data-t="1"].on{color:var(--amber)}
-  .tone__step[data-t="2"].on{color:var(--hot)}
-  .tone__desc{
-    font-size:14px;line-height:1.5;color:var(--ink-soft);margin:0;
-    border-left:2px solid var(--line);padding-left:14px;min-height:63px;transition:opacity .3s ease;
+  .cta:hover{transform:translateY(-2px)}
+  .cta:active{transform:translateY(0)}
+  .cta svg{width:18px;height:18px;fill:var(--ink)}
+  .dock__note{font-size:11.5px;color:var(--dim);text-align:center;line-height:1.4}
+  .dock__note a{color:var(--dim)}
+
+  /* ---------- slide-in menu ---------- */
+  .scrim{
+    position:fixed;inset:0;background:rgba(0,0,0,.6);opacity:0;pointer-events:none;
+    transition:opacity .3s ease;z-index:40;backdrop-filter:blur(2px);
   }
-
-  .reel__intro{
-    position:absolute;left:280px;right:0;top:13vh;z-index:7;
-    text-align:center;pointer-events:none;transition:opacity .3s ease;padding:0 30px;
+  .scrim.open{opacity:1;pointer-events:auto}
+  .sheet{
+    position:fixed;top:0;right:0;height:100%;width:min(84vw,340px);z-index:50;
+    background:#0C0C0E;border-left:1px solid var(--line);
+    transform:translateX(100%);transition:transform .32s cubic-bezier(.3,.9,.3,1);
+    padding:calc(env(safe-area-inset-top) + 26px) 26px 26px;
+    display:flex;flex-direction:column;gap:6px;
   }
-  .reel__intro h2{margin-bottom:12px}
-  .reel__intro p{font-size:15px;color:var(--ink-soft);margin:0}
-  .reel__hint{
-    position:absolute;left:50%;bottom:34px;transform:translateX(-50%);z-index:5;
-    font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);
-    display:flex;align-items:center;gap:10px;transition:opacity .4s ease;
+  .sheet.open{transform:none}
+  .sheet h3{font-family:"Archivo Black";font-weight:400;text-transform:uppercase;letter-spacing:-.03em;
+    font-size:13px;color:var(--dim);margin:0 0 14px}
+  .sheet a{
+    font-size:19px;font-weight:600;color:#fff;text-decoration:none;padding:13px 0;
+    border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;
   }
-  .reel__hint span{display:block;width:26px;height:1px;background:var(--line)}
-
-  /* ---------- sections ---------- */
-  .sec{padding-top:120px;padding-bottom:120px}
-  .sec--rule{border-top:1px solid var(--line)}
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
-
-  /* ---------- bare bubble pair ---------- */
-  .bare{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
-  .bare .b{font-size:17px;padding:11px 17px;max-width:100%}
-  .bare__cap{
-    font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;
-    color:var(--ink-soft);margin:20px 0 0;
+  .sheet a:hover{color:var(--bubble)}
+  .sheet a span{color:var(--dim);font-size:15px}
+  .sheet__foot{margin-top:auto;font-size:12px;color:var(--dim);line-height:1.6}
+  .sheet__foot a{font-size:12px;font-weight:400;border:none;padding:2px 0;display:inline;color:var(--dim)}
+  .sheet__x{
+    position:absolute;top:calc(env(safe-area-inset-top) + 22px);right:22px;
+    background:none;border:none;color:var(--dim);font-size:26px;cursor:pointer;line-height:1;padding:4px;
   }
+  .sheet__x:hover{color:#fff}
 
-  /* ---------- waitlist ---------- */
-  .join{padding-top:130px;padding-bottom:150px;text-align:center;border-top:1px solid var(--line)}
-  .form{display:flex;gap:10px;justify-content:center;margin:38px auto 0;max-width:520px;flex-wrap:wrap}
-  .form input#phone{flex:1 1 100%}
-  .form input#email{flex:1 1 190px}
-  .form input{
-    min-width:0;font-family:Archivo;font-size:16px;padding:15px 20px;
-    border:1px solid var(--line);border-radius:100px;background:#fff;color:var(--ink);outline:none;
-  }
-  .consent{
-    display:flex;gap:11px;align-items:flex-start;max-width:520px;margin:20px auto 0;
-    text-align:left;font-size:11.5px;line-height:1.55;color:var(--ink-soft);cursor:pointer;
-  }
-  .consent input{flex:0 0 auto;width:16px;height:16px;margin:1px 0 0;accent-color:#1FA34A;cursor:pointer}
-  .consent a{color:var(--ink-soft)}
-  .form input:focus{border-color:var(--ink)}
-  .form button{white-space:nowrap}
-  .form__msg{margin-top:18px;font-size:14px;color:var(--ink-soft);min-height:22px}
-  .form__msg.ok{color:#1FA34A;font-weight:700}
-  .form__msg.err{color:var(--hot);font-weight:700}
-
-  .footlinks{display:flex;gap:16px}
-  .footlinks a{color:var(--ink-soft)}
-  footer{padding-top:34px;padding-bottom:46px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-soft);
-    display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
-
-  /* ---------- mobile ---------- */
-  @media (max-width:860px){
-    .wrap{padding:0 30px}
-    .nav{padding:14px 30px}
-    .hero{grid-template-columns:1fr;padding-top:118px;padding-bottom:64px;gap:34px}
-    .grid2{grid-template-columns:1fr;gap:36px}
-    .sec{padding-top:84px;padding-bottom:84px}
-    .join{padding-top:96px;padding-bottom:110px}
-
-    .reel{height:390vh}
-    .chain{left:0;right:0;max-width:100%;padding:0 30px;gap:11px}
-    .msg{font-size:17.5px;padding:12px 17px;border-radius:21px;max-width:84%;box-shadow:none}
-    .msg.grp{margin-top:50px}
-    .reel__intro{left:0;right:0;top:12vh}
-    .reel__hint{bottom:auto;top:calc(12vh + 118px)}
-
-    .tone{
-      left:0;right:0;bottom:0;top:auto;transform:none;width:100%;
-      padding:18px 30px 22px;
-      background:linear-gradient(to top, var(--paper) 64%, rgba(242,242,247,0));
-    }
-    .tone__steps{flex-direction:row;align-items:baseline;gap:14px;margin-bottom:11px}
-    .tone__step{font-size:19px}
-    .tone__desc{font-size:12.5px;min-height:38px;padding-left:11px}
-  }
-
-  /* ---------- reduced motion ---------- */
   @media (prefers-reduced-motion:reduce){
-    html{scroll-behavior:auto}
-    .reel{height:auto}
-    .reel__sticky{position:static;height:auto;padding:80px 0}
-    .chain{position:static;transform:none!important;margin:0 auto;max-width:560px;left:auto;right:auto}
-    .msg{opacity:1!important;box-shadow:none}
-    .tone{position:static;transform:none;width:100%;max-width:560px;margin:0 auto 36px;padding:0 30px;background:none}
-    .tone__step{color:var(--ink)}
-    .reel__hint{display:none}
-    .reel__intro{position:static;transform:none;margin-bottom:36px;opacity:1!important;text-align:left;max-width:560px;margin-left:auto;margin-right:auto}
-    .thread--live .b,.thread--live .tstamp{opacity:1;transform:none}
-    .typing{display:none!important}
+    .row{transition:opacity .2s ease}
+    .row,.row.in{transform:none}
+    .typing i{animation:none;opacity:.7}
+    .who__status i{animation:none}
   }
   :focus-visible{outline:2px solid var(--bubble);outline-offset:3px}
 </style>
 </head>
 <body>
 
-<nav class="nav" id="nav">
-  <div class="mark">bro<i>.</i></div>
-  <a class="btn" href="#join">Sign up for beta</a>
-</nav>
-
-<!-- HERO -->
-<header class="wrap hero">
-  <div>
-    <p class="eyebrow">SMS accountability · beta opening now</p>
-    <h1>Delete your<br>reminder apps.</h1>
-    <p class="lede">
-      <b>Nobody mutes their texts.</b> Bro texts you from a real number — no app to open,
-      no notification to swipe away. He knows your schedule, calls out your excuses,
-      and rebuilds your day by text when life gets in the way.
-    </p>
-    <div class="hero__cta">
-      <a class="btn-lg" href="#join">Sign up for beta testing</a>
-      <span class="hero__note"><i class="dot"></i>Free for beta testers.</span>
-    </div>
-  </div>
-
-  <div class="phone" aria-hidden="true">
-    <div class="phone__hdr">Bro</div>
-    <div class="thread thread--live" id="heroThread">
-      <div class="tstamp"><b>Today</b> 11:48 AM</div>
-      <div class="b b--in">hey remind me take my vitamins tonight after the gym</div>
-      <div class="b b--out">bet</div>
-      <div class="tstamp">6:00 PM</div>
-      <div class="b b--out">gym time. let's move</div>
-      <div class="b b--in">gotta do homework first</div>
-      <div class="b b--out">gotcha</div>
-      <div class="b b--out">homework now, gym at 8</div>
-      <div class="tstamp">9:00 PM</div>
-      <div class="b b--out">don't forget to down those vitamins bro</div>
-      <div class="typing"><i></i><i></i><i></i></div>
-    </div>
-  </div>
-</header>
-
-<!-- THE SCROLL PIECE -->
-<section class="reel" id="reel" aria-label="Bro's three tones">
-  <div class="reel__sticky">
-
-    <div class="tone" id="tone" aria-hidden="true">
-      <div class="tone__steps">
-        <div class="tone__step" data-t="0">Chill</div>
-        <div class="tone__step" data-t="1">Normal</div>
-        <div class="tone__step" data-t="2">Savage</div>
-      </div>
-      <p class="tone__desc" id="toneDesc"></p>
-    </div>
-
-    <div class="reel__intro" id="intro">
-      <h2>Pick how<br>mean he gets.</h2>
-      <p>Scroll to check out all three.</p>
-    </div>
-
-    <div class="chain" id="chain"></div>
-
-    <div class="reel__hint" id="scrollHint"><span></span> keep scrolling <span></span></div>
-  </div>
-</section>
-
-<!-- WHAT IT COSTS YOU -->
-<section class="wrap sec sec--rule">
-  <div class="grid2">
-    <div>
-      <p class="eyebrow">What it costs you</p>
-      <h2>The app was<br>always the problem.</h2>
-      <p class="lede">
-        Every reminder app asks for your time before it gives any back. Download it, configure it,
-        check it, mark things done, feel bad about the streak you broke. Bro asks for a text.
-        You answer the way you'd answer anyone, in about two seconds, and you're already back
-        to whatever you were doing.
-      </p>
-    </div>
-    <div>
-      <div class="bare" aria-hidden="true">
-        <div class="b b--out">gym. now.</div>
-        <div class="b b--in">on my way</div>
-      </div>
-      <p class="bare__cap">That's the whole interaction.</p>
-    </div>
-  </div>
-</section>
-
-<!-- NEGOTIATION -->
-<section class="wrap sec sec--rule">
-  <div class="grid2">
-    <div>
-      <p class="eyebrow">Why routines break</p>
-      <h2>It's not a schedule.<br>It's a negotiation.</h2>
-      <p class="lede">
-        Every day is a little different, and rigid apps make you feel like you failed when
-        really the plan just needed to move. Tell Bro what changed and he rebuilds the rest of your day.
-        You didn't fall off — you renegotiated.
-      </p>
-    </div>
-    <div class="phone" aria-hidden="true">
-      <div class="phone__hdr">Bro</div>
-      <div class="thread thread--live" id="negThread">
-        <div class="tstamp"><b>Today</b> 12:30 PM</div>
-        <div class="b b--out">hey remember to unload the dishwasher</div>
-        <div class="b b--in">shoot i forgot i wont be home til 3 today</div>
-        <div class="b b--out">all good i'll hit you up then</div>
-        <div class="tstamp">4:20 PM</div>
-        <div class="b b--in">on vacation til sunday</div>
-        <div class="b b--out">nice, have fun</div>
-        <div class="b b--out">keep the habits going or take a break?</div>
-        <div class="b b--in">pause everything but morning pushups</div>
-        <div class="b b--out">done. see you monday ✌️</div>
-        <div class="typing"><i></i><i></i><i></i></div>
+<div class="app">
+  <div class="bar">
+    <div class="who">
+      <div class="who__badge">bro<span style="color:#0A0A0B">.</span></div>
+      <div class="who__meta">
+        <span class="who__name">Bro</span>
+        <span class="who__status"><i></i>online</span>
       </div>
     </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
-</section>
 
-<!-- JOIN -->
-<section class="wrap join" id="join">
-  <p class="eyebrow">Beta testing</p>
-  <h2>Quit the reminder apps.<br>Bro's got your back.</h2>
-  <p class="lede" style="margin-left:auto;margin-right:auto;text-align:center">
-    Drop your number and Bro texts you the day the beta opens. Email's optional — just a backup.
-  </p>
+  <div class="stream" id="stream"></div>
 
-  <form class="form" id="waitlist" action="https://formspree.io/f/xnjegpnz" method="POST">
-    <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" required
-           autocomplete="tel" inputmode="tel" aria-label="Mobile number">
-    <input type="email" id="email" name="email" placeholder="email (optional)"
-           autocomplete="email" inputmode="email" aria-label="Email address, optional">
-    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"
-           aria-hidden="true" style="display:none">
-    <button class="btn-lg" type="submit" id="joinBtn">Join beta</button>
-  </form>
+  <div class="dock" id="dock"></div>
+</div>
 
-  <label class="consent" for="consent">
-    <input type="checkbox" id="consent" name="consent" value="yes" required>
-    <span>By checking this box you agree to receive recurring automated text messages from Bro
-    at the number provided. Consent is not a condition of purchase. Message frequency varies.
-    Msg &amp; data rates may apply. Reply STOP to cancel, HELP for help. See our
-    <a href="/privacy">Privacy Policy</a>
-    and <a href="/terms">Terms</a>.</span>
-  </label>
-
-  <p class="form__msg" id="formMsg" role="status" aria-live="polite"></p>
-</section>
-
-<footer class="wrap">
-  <span>Texts From Bro — accountability that lives in your Messages.</span>
-  <span class="footlinks">
-    <a href="/privacy">Privacy Policy</a>
-    <a href="/terms">Terms</a>
-    <a href="mailto:hello@textsfrombro.com">Contact</a>
-  </span>
-  <span>Reply STOP anytime. Msg &amp; data rates may apply.</span>
-</footer>
+<div class="scrim" id="scrim"></div>
+<aside class="sheet" id="sheet" aria-hidden="true">
+  <button class="sheet__x" id="sheetX" aria-label="Close menu">&times;</button>
+  <h3>Texts From Bro</h3>
+  <a href="/about">What is this? <span>&rarr;</span></a>
+  <a href="/about#how">How it works <span>&rarr;</span></a>
+  <a href="/privacy">Privacy <span>&rarr;</span></a>
+  <a href="/terms">Terms <span>&rarr;</span></a>
+  <div class="sheet__foot">
+    Bro texts you from a real number. Reply STOP anytime.<br>
+    <a href="mailto:hello@textsfrombro.com">hello@textsfrombro.com</a>
+  </div>
+</aside>
 
 <script>
 (function(){
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ============ 1. WAITLIST ============ */
-  var form = document.getElementById("waitlist");
-  var msg  = document.getElementById("formMsg");
-  var btn  = document.getElementById("joinBtn");
+  /* ====== CONFIG ====== */
+  var BRO_NUMBER = "+16155386888";
+  var FIRST_TEXT = "what's up bro, you ready for today?";
 
-  form.addEventListener("submit", function(e){
-    e.preventDefault();
-    var phone = document.getElementById("phone").value.trim();
-    var consent = document.getElementById("consent");
-    if(!phone) return;
-    if(!consent.checked){
-      msg.className = "form__msg err";
-      msg.textContent = "check the box so bro's allowed to text you.";
-      return;
-    }
-    btn.disabled = true;
-    msg.className = "form__msg";
-    msg.textContent = "sending…";
-    fetch(form.action, {method:"POST", body:new FormData(form), headers:{"Accept":"application/json"}})
-      .then(function(res){
-        if(!res.ok) throw new Error();
-        form.style.display = "none";
-        document.querySelector(".consent").style.display = "none";
-        msg.className = "form__msg ok";
-        msg.textContent = "you're in. bro'll text you when the beta opens.";
-      })
-      .catch(function(){
-        btn.disabled = false;
-        msg.className = "form__msg err";
-        msg.textContent = "that didn't go through. try again in a sec.";
-      });
-  });
+  var stream = document.getElementById("stream");
+  var dock   = document.getElementById("dock");
 
-  /* ============ 2. LOOPING THREADS ============ */
-  function runThread(id){
-    var thread = document.getElementById(id);
-    if(!thread) return;
-    if(reduce){ thread.classList.remove("thread--live"); return; }
+  function scrollDown(){ stream.scrollTop = stream.scrollHeight; }
 
-    var typing = thread.querySelector(".typing");
-    var items  = Array.prototype.slice.call(thread.children)
-                   .filter(function(el){ return !el.classList.contains("typing"); });
-    var i = 0;
-
-    function step(){
-      if(i >= items.length){
-        typing.classList.remove("on");
-        setTimeout(reset, 3200);
-        return;
-      }
-      var el   = items[i];
-      var bro  = el.classList.contains("b--out");
-
-      if(bro){
-        typing.style.top = el.offsetTop + "px";
-        typing.classList.add("on");
-      }
-      setTimeout(function(){
-        typing.classList.remove("on");
-        el.classList.add("in");
-        i++;
-        setTimeout(step, 240);
-      }, bro ? (i === 0 ? 420 : 600) : 260);
-    }
-
-    function reset(){
-      items.forEach(function(el){ el.classList.remove("in"); });
-      i = 0;
-      setTimeout(step, 700);
-    }
-
-    step();
+  function addRow(who, text, cb){
+    var row = document.createElement("div");
+    row.className = "row " + who;
+    var b = document.createElement("div");
+    b.className = "bubble";
+    b.textContent = text;
+    row.appendChild(b);
+    stream.appendChild(row);
+    scrollDown();
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){ row.classList.add("in"); });
+    });
+    if(cb) setTimeout(cb, reduce ? 120 : 360);
   }
-  runThread("heroThread");
-  runThread("negThread");
 
-  /* ============ 3. THE THREE TONES ============ */
-  var TONES = [
-    {name:"Chill",  color:"#30D158", desc:"Warm, encouraging, gentle ribbing. The friend who has your back."},
-    {name:"Normal", color:"#FF9F0A", desc:"Confident, a little cocky. Light roasting. The default."},
-    {name:"Savage", color:"#FF3B30", desc:"Brutal tough-love. Won't take no for an answer."}
-  ];
-
-  var SCRIPT = [
-    {who:"bro", tone:0, t:"hey time to take the trash out"},
-    {who:"me",  tone:0, t:"ok i'm almost home"},
-    {who:"bro", tone:0, t:"bet"},
-    {who:"bro", tone:0, t:"time to study for that test of yours. you got this man"},
-    {who:"me",  tone:0, t:"thx"},
-    {who:"bro", tone:1, t:"morning pushups. go. 💪"},
-    {who:"me",  tone:1, t:"5 more mins"},
-    {who:"bro", tone:1, t:"ok, take your time then gimme 20"},
-    {who:"bro", tone:2, t:"crack open that book dude"},
-    {who:"me",  tone:2, t:"im tired"},
-    {who:"bro", tone:2, t:"you're not tired, you're bored. get off your butt and let's go"},
-    {who:"me",  tone:2, t:"ok"},
-    {who:"bro", tone:2, t:"there it is. same time tomorrow"}
-  ];
-
-  var chain = document.getElementById("chain");
-  var N = SCRIPT.length;
-
-  var nodes = SCRIPT.map(function(m,ix){
-    var el = document.createElement("div");
-    el.className = "msg" + (ix > 0 && SCRIPT[ix-1].tone !== m.tone ? " grp" : "");
-    el.setAttribute("data-who", m.who);
-    el.textContent = m.t;
-    if(m.who === "bro") el.style.background = TONES[m.tone].color;
-    chain.appendChild(el);
-    return el;
-  });
-
-  var BOUNDS = [0];
-  for(var k=1;k<N;k++){
-    if(SCRIPT[k].tone !== SCRIPT[k-1].tone) BOUNDS.push((k - 0.5)/(N-1));
+  function showTyping(){
+    var row = document.createElement("div");
+    row.className = "row bro typing in";
+    row.innerHTML = '<div class="bubble"><i></i><i></i><i></i></div>';
+    stream.appendChild(row);
+    scrollDown();
+    return row;
   }
-  BOUNDS.push(1.01);
 
-  var steps    = Array.prototype.slice.call(document.querySelectorAll(".tone__step"));
-  var toneDesc = document.getElementById("toneDesc");
-
-  function paintTone(t){
-    steps.forEach(function(s,ix){ s.classList.toggle("on", ix===t); });
-    toneDesc.style.opacity = "0";
+  function broSays(text, cb){
+    var t = showTyping();
     setTimeout(function(){
-      toneDesc.textContent = TONES[t].desc;
-      toneDesc.style.opacity = "1";
-    }, 150);
-  }
-  toneDesc.textContent = TONES[0].desc;
-  steps[0].classList.add("on");
-
-  if(reduce) return;
-
-  var section = document.getElementById("reel");
-  var intro   = document.getElementById("intro");
-  var hint    = document.getElementById("scrollHint");
-  var nav     = document.getElementById("nav");
-  var ticking = false, lastTone = 0, colH = 0, MOBILE = false;
-
-  function layout(){
-    MOBILE = window.innerWidth < 860;
-    chain.style.transform = "";
-    colH = chain.offsetHeight;
+      t.remove();
+      addRow("bro", text, cb);
+    }, reduce ? 260 : 820);
   }
 
-  function frame(){
-    ticking = false;
-    nav.classList.toggle("stuck", window.scrollY > 40);
+  function clearDock(){ dock.innerHTML = ""; }
 
-    var rect = section.getBoundingClientRect();
-    var span = section.offsetHeight - window.innerHeight;
-    var p = Math.min(1, Math.max(0, -rect.top / span));
-
-    var vh     = window.innerHeight;
-    var start  = vh * 1.02;                 /* first bubble waits just off-screen */
-    var travel = colH + start + vh * 0.12;
-    var offset = start - p * travel;
-    chain.style.transform = "translateY(" + offset + "px)";
-
-    var mid = MOBILE ? vh * 0.46 : vh * 0.52;
-    var hold = vh * 0.12, fade = vh * 0.30;
-    for(var j=0;j<nodes.length;j++){
-      var n = nodes[j];
-      var c = n.offsetTop + offset + n.offsetHeight/2;
-      var d = Math.abs(c - mid);
-      var o = Math.max(0, Math.min(1, 1 - (d - hold)/fade));
-      n.style.opacity = o.toFixed(3);
-    }
-
-    var tone = 0;
-    for(var b=0;b<3;b++){ if(p >= BOUNDS[b] && p < BOUNDS[b+1]) tone = b; }
-    if(tone !== lastTone){ paintTone(tone); lastTone = tone; }
-
-    intro.style.opacity = String(Math.max(0, 1 - p*9));
-    hint.style.opacity  = String(Math.max(0, 1 - p*5));
+  function showChoices(options){
+    clearDock();
+    var box = document.createElement("div");
+    box.className = "choices";
+    options.forEach(function(opt){
+      var btn = document.createElement("button");
+      btn.className = "choice";
+      btn.textContent = opt.label;
+      btn.addEventListener("click", function(){
+        addRow("me", opt.reply || opt.label);
+        clearDock();
+        setTimeout(opt.next, reduce ? 160 : 480);
+      });
+      box.appendChild(btn);
+    });
+    dock.appendChild(box);
+    requestAnimationFrame(function(){ box.classList.add("show"); });
   }
 
-  function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(frame); } }
-  window.addEventListener("scroll", onScroll, {passive:true});
+  function showCTA(){
+    clearDock();
+    var box = document.createElement("div");
+    box.className = "choices";
 
-  var rt;
-  window.addEventListener("resize", function(){
-    clearTimeout(rt);
-    rt = setTimeout(function(){ layout(); frame(); }, 120);
-  }, {passive:true});
+    var sms = "sms:" + BRO_NUMBER + (/iPhone|iPad|Mac/i.test(navigator.platform) ? "&" : "?") +
+              "body=" + encodeURIComponent("hey bro, i'm in. let's go");
 
-  layout();
-  frame();
+    var a = document.createElement("a");
+    a.className = "cta";
+    a.href = sms;
+    a.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 5.94 2 10.8c0 2.77 1.46 5.24 3.75 6.86-.13 1.13-.6 2.4-1.3 3.34 1.5-.2 3.2-.86 4.3-1.62.98.26 2.02.42 3.25.42 5.52 0 10-3.94 10-8.8S17.52 2 12 2z"/></svg>Let\u2019s go';
+    box.appendChild(a);
+
+    var note = document.createElement("p");
+    note.className = "dock__note";
+    note.innerHTML = 'Opens your Messages with a text ready to send.<br>By texting Bro you agree to the <a href="/terms">Terms</a> &amp; <a href="/privacy">Privacy Policy</a>.';
+    box.appendChild(note);
+
+    dock.appendChild(box);
+    requestAnimationFrame(function(){ box.classList.add("show"); });
+  }
+
+  /* ====== THE CONVERSATION ====== */
+  function start(){
+    broSays(FIRST_TEXT, function(){
+      showChoices([
+        { label:"let's go", reply:"let's go", next:convReady },
+        { label:"wait… what are you?", reply:"wait… what are you?", next:convWhat }
+      ]);
+    });
+  }
+
+  function convReady(){
+    broSays("that's what i like to hear", function(){
+      broSays("i'm the friend who texts you to get off ur butt and do the stuff you said you would. no app, no login, just chillin in your messages.", closeOut);
+    });
+  }
+
+  function convWhat(){
+    broSays("i'm bro. i text you from a real number and keep you honest — gym, studying, whatever you wanna do.", closeOut);
+  }
+
+  function closeOut(){
+    broSays("send that first text and we're rolling", function(){
+      showCTA();
+    });
+  }
+
+  /* ====== MENU ====== */
+  var scrim = document.getElementById("scrim");
+  var sheet = document.getElementById("sheet");
+  function openMenu(){ scrim.classList.add("open"); sheet.classList.add("open"); sheet.setAttribute("aria-hidden","false"); }
+  function closeMenu(){ scrim.classList.remove("open"); sheet.classList.remove("open"); sheet.setAttribute("aria-hidden","true"); }
+  document.getElementById("menuBtn").addEventListener("click", openMenu);
+  document.getElementById("sheetX").addEventListener("click", closeMenu);
+  scrim.addEventListener("click", closeMenu);
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape") closeMenu(); });
+
+  setTimeout(start, reduce ? 200 : 600);
 })();
 </script>
 </body>
