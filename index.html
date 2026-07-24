@@ -230,6 +230,8 @@
   .form__msg.ok{color:#1FA34A;font-weight:700}
   .form__msg.err{color:var(--hot);font-weight:700}
 
+  .footlinks{display:flex;gap:16px}
+  .footlinks a{color:var(--ink-soft)}
   footer{padding-top:34px;padding-bottom:46px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-soft);
     display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
@@ -418,8 +420,8 @@
     <span>By checking this box you agree to receive recurring automated text messages from Bro
     at the number provided. Consent is not a condition of purchase. Message frequency varies.
     Msg &amp; data rates may apply. Reply STOP to cancel, HELP for help. See our
-    <a href="https://gist.github.com/prime8128/d2f7dc44a8859d2216e80ae18f33b3a1" target="_blank" rel="noopener">Privacy Policy</a>
-    and <a href="https://gist.github.com/prime8128/d361592ec6b2b35a2a5a5b0b1a7fdeef" target="_blank" rel="noopener">Terms</a>.</span>
+    <a href="/privacy">Privacy Policy</a>
+    and <a href="/terms">Terms</a>.</span>
   </label>
 
   <p class="form__msg" id="formMsg" role="status" aria-live="polite"></p>
@@ -427,6 +429,11 @@
 
 <footer class="wrap">
   <span>Texts From Bro — accountability that lives in your Messages.</span>
+  <span class="footlinks">
+    <a href="/privacy">Privacy Policy</a>
+    <a href="/terms">Terms</a>
+    <a href="mailto:edc2023@icloud.com">Contact</a>
+  </span>
   <span>Reply STOP anytime. Msg &amp; data rates may apply.</span>
 </footer>
 
