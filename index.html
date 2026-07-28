@@ -45,6 +45,35 @@
     overflow:hidden;
   }
 
+  /* ---------- pinned consent / signup bar ---------- */
+  .signup{
+    flex:0 0 auto;background:#0C0C0E;border-bottom:1px solid var(--line);
+    padding:calc(env(safe-area-inset-top) + 12px) 18px 13px;
+  }
+  .signup__intro{font-size:12.5px;color:var(--dim);margin:0 0 9px;line-height:1.4}
+  .signup__intro b{color:#fff;font-weight:600}
+  .signup__form{display:flex;gap:8px;flex-wrap:wrap}
+  .signup__form input[type="tel"]{
+    flex:1 1 150px;min-width:0;font-family:var(--sys);font-size:15px;padding:11px 15px;
+    border:1px solid #2A2A30;border-radius:100px;background:#000;color:#fff;outline:none;
+  }
+  .signup__form input[type="tel"]:focus{border-color:var(--bubble)}
+  .signup__form button{
+    flex:0 0 auto;font-family:var(--sys);font-size:14px;font-weight:700;
+    padding:11px 20px;border-radius:100px;border:none;cursor:pointer;
+    background:var(--bubble);color:var(--ink);
+  }
+  .signup__form button[disabled]{opacity:.5;cursor:default}
+  .signup__consent{
+    display:flex;gap:9px;align-items:flex-start;margin-top:10px;
+    font-size:11px;line-height:1.45;color:var(--dim);cursor:pointer;
+  }
+  .signup__consent input{flex:0 0 auto;width:15px;height:15px;margin:1px 0 0;accent-color:var(--bubble);cursor:pointer}
+  .signup__consent a{color:#B8B8BE;text-decoration:underline}
+  .signup__msg{font-size:11.5px;margin-top:7px;min-height:14px;color:var(--dim)}
+  .signup__msg.ok{color:var(--bubble);font-weight:600}
+  .signup__msg.err{color:#FF6961;font-weight:600}
+
   .app{
     display:flex;flex-direction:column;
     height:100dvh;max-width:520px;margin:0 auto;
@@ -188,6 +217,23 @@
 <body>
 
 <div class="app">
+
+  <!-- SMS opt-in: phone + consent, pinned at top, visible with no scroll -->
+  <section class="signup" aria-label="Text message signup">
+    <p class="signup__intro"><b>Get Bro on your phone.</b> Bro sends you the personal reminders you set for yourself, by text.</p>
+    <form class="signup__form" id="signupForm" action="https://formspree.io/f/xnjegpnz" method="POST">
+      <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" required
+             autocomplete="tel" inputmode="tel" aria-label="Mobile phone number">
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+      <button type="submit" id="signupBtn">Get Bro</button>
+      <label class="signup__consent" for="consent">
+        <input type="checkbox" id="consent" name="consent" value="yes" required>
+        <span>By checking this box, you agree to receive recurring automated text messages from Bro at the number provided. Consent is not a condition of purchase. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. See our <a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms</a>.</span>
+      </label>
+    </form>
+    <p class="signup__msg" id="signupMsg" role="status" aria-live="polite"></p>
+  </section>
+
   <div class="bar">
     <div class="who">
       <div class="who__badge">bro<span style="color:#0A0A0B">.</span></div>
@@ -223,6 +269,40 @@
 <script>
 (function(){
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ===== SMS SIGNUP FORM (top consent bar) ===== */
+  (function(){
+    var form = document.getElementById("signupForm");
+    var msg  = document.getElementById("signupMsg");
+    var btn  = document.getElementById("signupBtn");
+    if(!form) return;
+    form.addEventListener("submit", function(e){
+      e.preventDefault();
+      var phone = document.getElementById("phone").value.trim();
+      var consent = document.getElementById("consent");
+      if(!phone) return;
+      if(!consent.checked){
+        msg.className = "signup__msg err";
+        msg.textContent = "check the box so bro's allowed to text you.";
+        return;
+      }
+      btn.disabled = true;
+      msg.className = "signup__msg";
+      msg.textContent = "sending…";
+      fetch(form.action, {method:"POST", body:new FormData(form), headers:{"Accept":"application/json"}})
+        .then(function(res){
+          if(!res.ok) throw new Error();
+          form.style.display = "none";
+          msg.className = "signup__msg ok";
+          msg.textContent = "you're in. bro'll text you when the beta opens.";
+        })
+        .catch(function(){
+          btn.disabled = false;
+          msg.className = "signup__msg err";
+          msg.textContent = "that didn't go through. try again in a sec.";
+        });
+    });
+  })();
 
   /* ====== CONFIG ====== */
   var BRO_NUMBER = "+16155386888";
@@ -291,18 +371,19 @@
     var box = document.createElement("div");
     box.className = "choices";
 
-    var sms = "sms:" + BRO_NUMBER + (/iPhone|iPad|Mac/i.test(navigator.platform) ? "&" : "?") +
-              "body=" + encodeURIComponent("hey bro, i'm in. let's go");
+    // --- POST-TWILIO: uncomment to route straight into iMessage ---
+    // var sms = "sms:" + BRO_NUMBER + (/iPhone|iPad|Mac/i.test(navigator.platform) ? "&" : "?") +
+    //           "body=" + encodeURIComponent("hey bro, i'm in. let's go");
 
     var a = document.createElement("a");
     a.className = "cta";
-    a.href = sms;
+    a.href = "/about#join";   // pre-Twilio: send to the beta signup. swap back to `sms` once approved.
     a.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 5.94 2 10.8c0 2.77 1.46 5.24 3.75 6.86-.13 1.13-.6 2.4-1.3 3.34 1.5-.2 3.2-.86 4.3-1.62.98.26 2.02.42 3.25.42 5.52 0 10-3.94 10-8.8S17.52 2 12 2z"/></svg>Let\u2019s go';
     box.appendChild(a);
 
     var note = document.createElement("p");
     note.className = "dock__note";
-    note.innerHTML = 'Opens your Messages with a text ready to send.<br>By texting Bro you agree to the <a href="/terms">Terms</a> &amp; <a href="/privacy">Privacy Policy</a>.';
+    note.innerHTML = 'Drop your number and Bro texts you when the beta opens.<br>By signing up you agree to the <a href="/terms">Terms</a> &amp; <a href="/privacy">Privacy Policy</a>.';
     box.appendChild(note);
 
     dock.appendChild(box);
