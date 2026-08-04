@@ -405,20 +405,23 @@
     Drop your number and Bro texts you the day the beta opens. Email's optional — just a backup.
   </p>
 
+  <p style="font-size:14px;color:var(--ink-soft);margin:0 0 14px">Signing up for texts is optional — you can read this whole page without it.</p>
   <form class="form" id="waitlist" action="https://formspree.io/f/xnjegpnz" method="POST">
-    <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" required
+    <input type="tel" id="phone" name="phone" placeholder="your mobile number"
            autocomplete="tel" inputmode="tel" aria-label="Mobile number">
     <input type="email" id="email" name="email" placeholder="email (optional)"
            autocomplete="email" inputmode="email" aria-label="Email address, optional">
     <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"
            aria-hidden="true" style="display:none">
     <button class="btn-lg" type="submit" id="joinBtn">Join beta</button>
+    <button class="btn-lg" type="button" id="browseBtn2" style="background:transparent;border:1px solid var(--line);color:var(--ink-soft)">No thanks</button>
   </form>
 
   <label class="consent" for="consent">
-    <input type="checkbox" id="consent" name="consent" value="yes" required>
-    <span>By checking this box you agree to receive recurring automated text message reminders from Bro
-    at the number provided. Consent is not required to use any part of this service. Message frequency varies.
+    <input type="checkbox" id="consent" name="consent" value="yes">
+    <span>I agree to receive recurring automated text message reminders from Bro
+    <b>to help me stick to the personal reminders and habits I set for myself</b>, at the number I provided.
+    Consent is optional and is not required to use this website or any part of this service. Message frequency varies.
     Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help.
     No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. See our
     <a href="/privacy">Privacy Policy</a>
@@ -446,15 +449,29 @@
   var form = document.getElementById("waitlist");
   var msg  = document.getElementById("formMsg");
   var btn  = document.getElementById("joinBtn");
+  var browse2 = document.getElementById("browseBtn2");
+
+  if(browse2){
+    browse2.addEventListener("click", function(){
+      form.style.display = "none";
+      var c = document.querySelector(".consent"); if(c) c.style.display = "none";
+      msg.className = "form__msg";
+      msg.textContent = "all good — no texts. enjoy the site.";
+    });
+  }
 
   form.addEventListener("submit", function(e){
     e.preventDefault();
     var phone = document.getElementById("phone").value.trim();
     var consent = document.getElementById("consent");
-    if(!phone) return;
     if(!consent.checked){
       msg.className = "form__msg err";
-      msg.textContent = "check the box so bro's allowed to text you.";
+      msg.textContent = "check the box to agree, or pick 'no thanks'.";
+      return;
+    }
+    if(!phone){
+      msg.className = "form__msg err";
+      msg.textContent = "add your number so bro knows where to text.";
       return;
     }
     btn.disabled = true;
