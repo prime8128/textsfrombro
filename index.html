@@ -70,6 +70,15 @@
   }
   .signup__consent input{flex:0 0 auto;width:15px;height:15px;margin:1px 0 0;accent-color:var(--bubble);cursor:pointer}
   .signup__consent a{color:#B8B8BE;text-decoration:underline}
+  .signup__actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}
+  .signup__actions button{
+    flex:0 0 auto;font-family:var(--sys);font-size:14px;font-weight:700;
+    padding:11px 20px;border-radius:100px;border:none;cursor:pointer;
+  }
+  #signupBtn{background:var(--bubble);color:var(--ink)}
+  #signupBtn[disabled]{opacity:.5;cursor:default}
+  .signup__ghost{background:transparent;color:var(--dim);border:1px solid #2A2A30 !important}
+  .signup__ghost:hover{color:#fff;border-color:#3A3A40 !important}
   .signup__msg{font-size:11.5px;margin-top:7px;min-height:14px;color:var(--dim)}
   .signup__msg.ok{color:var(--bubble);font-weight:600}
   .signup__msg.err{color:#FF6961;font-weight:600}
@@ -218,19 +227,24 @@
 
 <div class="app">
 
-  <!-- SMS opt-in: phone + consent, pinned at top, visible with no scroll -->
+  <!-- SMS opt-in: voluntary, purpose stated in the consent label itself -->
   <section class="signup" aria-label="Text message signup">
-    <p class="signup__intro"><b>Get Bro on your phone.</b> Bro sends you the personal reminders you set for yourself, by text.</p>
-    <form class="signup__form" id="signupForm" action="https://formspree.io/f/xnjegpnz" method="POST">
-      <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" required
-             autocomplete="tel" inputmode="tel" aria-label="Mobile phone number">
-      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
-      <button type="submit" id="signupBtn">Get Bro</button>
-      <label class="signup__consent" for="consent">
-        <input type="checkbox" id="consent" name="consent" value="yes" required>
-        <span>By checking this box, you agree to receive recurring automated text message reminders from Bro at the number provided. Consent is not required to use any part of this service. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. See our <a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms</a>.</span>
-      </label>
-    </form>
+    <p class="signup__intro"><b>Want Bro to text you?</b> This is optional. You can explore the site without signing up for texts.</p>
+    <div id="signupWrap">
+      <form class="signup__form" id="signupForm" action="https://formspree.io/f/xnjegpnz" method="POST">
+        <input type="tel" id="phone" name="phone" placeholder="your mobile number"
+               autocomplete="tel" inputmode="tel" aria-label="Mobile phone number">
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+        <label class="signup__consent" for="consent">
+          <input type="checkbox" id="consent" name="consent" value="yes">
+          <span>I agree to receive recurring automated text message reminders from Bro <b>to help me stick to the personal reminders and habits I set for myself</b>, at the number I provided. Consent is optional and is not required to use this website or any part of this service. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. See our <a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms</a>.</span>
+        </label>
+        <div class="signup__actions">
+          <button type="submit" id="signupBtn">Sign up for texts</button>
+          <button type="button" id="browseBtn" class="signup__ghost">Just browsing, no thanks</button>
+        </div>
+      </form>
+    </div>
     <p class="signup__msg" id="signupMsg" role="status" aria-live="polite"></p>
   </section>
 
@@ -270,20 +284,37 @@
 (function(){
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ===== SMS SIGNUP FORM (top consent bar) ===== */
+  /* ===== SMS SIGNUP (voluntary, two-path opt-in) ===== */
   (function(){
     var form = document.getElementById("signupForm");
+    var wrap = document.getElementById("signupWrap");
     var msg  = document.getElementById("signupMsg");
     var btn  = document.getElementById("signupBtn");
+    var browse = document.getElementById("browseBtn");
     if(!form) return;
+
+    // "Just browsing" — proves opt-in is optional: dismiss the form entirely.
+    if(browse){
+      browse.addEventListener("click", function(){
+        wrap.style.display = "none";
+        msg.className = "signup__msg";
+        msg.textContent = "all good — no texts. enjoy looking around.";
+      });
+    }
+
     form.addEventListener("submit", function(e){
       e.preventDefault();
       var phone = document.getElementById("phone").value.trim();
       var consent = document.getElementById("consent");
-      if(!phone) return;
+      // Consent + number are only needed for the opt-in path, checked here (not forced in HTML).
       if(!consent.checked){
         msg.className = "signup__msg err";
-        msg.textContent = "check the box so bro's allowed to text you.";
+        msg.textContent = "check the box to agree, or pick 'just browsing'.";
+        return;
+      }
+      if(!phone){
+        msg.className = "signup__msg err";
+        msg.textContent = "add your number so bro knows where to text.";
         return;
       }
       btn.disabled = true;
@@ -292,7 +323,7 @@
       fetch(form.action, {method:"POST", body:new FormData(form), headers:{"Accept":"application/json"}})
         .then(function(res){
           if(!res.ok) throw new Error();
-          form.style.display = "none";
+          wrap.style.display = "none";
           msg.className = "signup__msg ok";
           msg.textContent = "you're in. bro'll text you when the beta opens.";
         })
