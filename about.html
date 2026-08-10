@@ -87,6 +87,8 @@
   /* ---------- hero ---------- */
   .hero{padding-top:170px;padding-bottom:90px;display:grid;grid-template-columns:1fr 320px;gap:60px;align-items:center}
   .hero__cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px;align-items:center}
+  .hero__alt{font-size:11.5px;line-height:1.55;color:var(--ink-soft);margin:14px 0 0;max-width:46ch}
+  .hero__alt a{color:var(--ink-soft)}
   .btn-lg{
     font-family:Archivo;font-size:15px;font-weight:700;letter-spacing:-.01em;
     padding:15px 26px;border-radius:100px;border:none;cursor:pointer;
@@ -296,9 +298,13 @@
       and rebuilds your day by text when life gets in the way.
     </p>
     <div class="hero__cta">
-      <a class="btn-lg" href="#join">Sign up for beta testing</a>
+      <a class="btn-lg" id="smsCta" href="#join">Let&rsquo;s go</a>
       <span class="hero__note"><i class="dot"></i>Free for beta testers.</span>
     </div>
+    <p class="hero__alt" id="ctaAlt">Opens your Messages app with &ldquo;Hey bro, I&rsquo;m in&rdquo; ready to send.
+      Sending it opts you in to recurring automated reminder texts for the reminders you set yourself.
+      Msg frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help.
+      <a href="#join">Rather use a form?</a></p>
   </div>
 
   <div class="phone" aria-hidden="true">
@@ -444,6 +450,22 @@
 <script>
 (function(){
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ============ 0. iMESSAGE DEEP LINK ============
+     Text-based opt-in: the user sends the message from their own device.
+     The href stays "#join" in the markup so it degrades to the form when
+     JS is off. Apple's Messages wants `&body=`, everyone else `?body=`. */
+  (function(){
+    var BRO_NUMBER  = "+16155386888";
+    var OPT_IN_TEXT = "Hey bro, I'm in";
+    var cta = document.getElementById("smsCta");
+    if(!cta) return;
+    var ua = navigator.userAgent || "";
+    var isApple = /iPad|iPhone|iPod|Macintosh/.test(ua) ||
+                  (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    cta.href = "sms:" + BRO_NUMBER + (isApple ? "&" : "?") +
+               "body=" + encodeURIComponent(OPT_IN_TEXT);
+  })();
 
   /* ============ 1. WAITLIST ============ */
   var form = document.getElementById("waitlist");
