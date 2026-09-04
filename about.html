@@ -83,6 +83,10 @@
   }
   .mark i{color:var(--ink);font-style:normal;margin-left:3px}
   .nav a.btn{font-size:13px;font-weight:700;padding:9px 16px;border-radius:100px;background:var(--ink);color:var(--paper);text-decoration:none}
+  /* Wayfinding, not a CTA — text link so it never competes with signup. */
+  .nav__right{display:flex;align-items:center;gap:16px}
+  .nav a.nav__login{font-size:13px;font-weight:700;color:var(--ink-soft);text-decoration:none}
+  .nav a.nav__login:hover{color:var(--ink)}
 
   /* ---------- hero ---------- */
   .hero{padding-top:170px;padding-bottom:90px;display:grid;grid-template-columns:1fr 320px;gap:60px;align-items:center}
@@ -284,7 +288,10 @@
 
 <nav class="nav" id="nav">
   <div class="mark">bro<i>.</i></div>
-  <a class="btn" href="/">Text Bro &rarr;</a>
+  <div class="nav__right">
+    <a class="nav__login" href="https://app.textsfrombro.com">Log in</a>
+    <a class="btn" href="/">Text Bro &rarr;</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -440,6 +447,7 @@
 <footer class="wrap">
   <span>Texts From Bro — accountability that lives in your Messages.</span>
   <span class="footlinks">
+    <a href="https://app.textsfrombro.com">Log in</a>
     <a href="/privacy">Privacy Policy</a>
     <a href="/terms">Terms</a>
     <a href="mailto:hello@textsfrombro.com">Contact</a>
