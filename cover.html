@@ -93,6 +93,7 @@ try{if(localStorage.getItem("bro_beta_ok")==="1")location.replace("/official");}
 
   /* ---------- waitlist form ---------- */
   .wform{margin:26px 0 0;max-width:440px}
+  .wform__head{font-size:15.5px;font-weight:700;color:#fff;margin:0 0 10px}
   .wform input[type="email"],.wform input[type="tel"]{
     width:100%;font-family:Archivo,var(--sys);font-size:16px;padding:14px 18px;margin-bottom:9px;
     border:1px solid #2A2A30;border-radius:100px;background:#0C0C0E;color:#fff;outline:none;
@@ -279,6 +280,7 @@ try{if(localStorage.getItem("bro_beta_ok")==="1")location.replace("/official");}
     <p class="beta-line"><i></i>Not open yet — the beta is invite-only.</p>
 
     <form class="wform" id="waitlistForm" novalidate>
+      <p class="wform__head">Drop your email to get on the waitlist.</p>
       <input type="email" id="wlEmail" name="email" placeholder="your email"
              autocomplete="email" inputmode="email" aria-label="Email address">
       <input type="tel" id="wlPhone" name="phone" placeholder="mobile number (optional)"
