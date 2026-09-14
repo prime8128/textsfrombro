@@ -1,4 +1,9 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/official", "destination": "/index.html" },
+    { "source": "/api/waitlist", "destination": "https://app.textsfrombro.com/api/waitlist" },
+    { "source": "/api/beta-code", "destination": "https://app.textsfrombro.com/api/beta-code" }
+  ]
 }
