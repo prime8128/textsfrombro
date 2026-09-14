@@ -14,5 +14,12 @@
       "source": "/api/beta-code",
       "destination": "https://app.textsfrombro.com/api/beta-code"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/cover",
+      "permanent": false
+    }
   ]
 }
