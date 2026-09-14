@@ -13,22 +13,6 @@
     {
       "source": "/api/beta-code",
       "destination": "https://app.textsfrombro.com/api/beta-code"
-    },
-    {
-      "source": "/rt-probe",
-      "destination": "/rt-x"
-    }
-  ],
-  "redirects": [
-    {
-      "source": "/rt-file",
-      "destination": "/rt-y",
-      "permanent": false
-    },
-    {
-      "source": "/rt-x",
-      "destination": "/rt-y",
-      "permanent": false
     }
   ]
 }
