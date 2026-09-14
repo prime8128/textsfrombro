@@ -112,8 +112,27 @@ try{if(localStorage.getItem("bro_beta_ok")==="1")location.replace("/official");}
   .wform button:hover{transform:translateY(-2px)}
   .wform button[disabled]{opacity:.5;cursor:default;transform:none}
   .wform__msg{font-size:13px;margin:12px 0 0;min-height:17px;color:var(--dim)}
-  .wform__msg.ok{color:var(--bubble);font-weight:600}
   .wform__msg.err{color:#FF6961;font-weight:600}
+
+  /* ---------- the substantial success state ---------- */
+  .wsuccess{
+    margin:26px 0 0;max-width:440px;padding:24px 22px;
+    border:1.5px solid var(--bubble);border-radius:20px;background:#0C0C0E;
+    box-shadow:0 8px 32px -14px rgba(48,209,88,.5);
+  }
+  .wsuccess h2{
+    font-family:"Archivo Black";font-weight:400;letter-spacing:-.03em;line-height:1;
+    text-transform:uppercase;margin:0 0 12px;font-size:24px;color:var(--bubble);
+  }
+  .wsuccess p{margin:0 0 16px;font-size:14.5px;line-height:1.55;color:#EDEDEF}
+  .wsuccess .survey-btn{
+    display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;
+    font-family:Archivo,var(--sys);font-size:15px;font-weight:700;
+    padding:14px 20px;border-radius:100px;background:var(--bubble);color:var(--ink);
+    box-shadow:0 8px 24px -10px rgba(48,209,88,.7);transition:transform .16s ease;
+  }
+  .wsuccess .survey-btn:hover{transform:translateY(-2px)}
+  .wsuccess__mail{font-size:12px;color:var(--dim);margin:12px 0 0 !important}
 
   .under{margin:26px 0 0;font-size:13px;color:var(--dim)}
   .under a{color:#B8B8BE}
@@ -273,6 +292,21 @@ try{if(localStorage.getItem("bro_beta_ok")==="1")location.replace("/official");}
       <button type="submit" id="wlBtn">Join the waitlist</button>
       <p class="wform__msg" id="wlMsg" role="status" aria-live="polite"></p>
     </form>
+
+    <!-- Shown to EVERYONE on a 200 — new signup, merge, or repeat. The copy
+         is deliberately true in all three cases; a distinct "already joined"
+         message would break the enumeration safety the API preserves. -->
+    <div class="wsuccess" id="wlSuccess" hidden role="status">
+      <h2>You're on the list.</h2>
+      <p>That's it — nothing else to do. Already signed up before? You're still on it,
+      nothing lost.</p>
+      <a class="survey-btn" href="https://tally.so/r/pbQRbJ" target="_blank" rel="noopener">
+        While you wait — tell us what you actually need &rarr;
+      </a>
+      <p class="wsuccess__mail" id="wlSuccessMail" hidden>A confirmation email is on its way
+      (first-timers — repeat signups were already confirmed).</p>
+    </div>
+
     <button class="beta-btn" id="betaOpen" type="button" style="max-width:440px">Have a beta code?</button>
 
     <p class="under">
@@ -403,10 +437,12 @@ try{if(localStorage.getItem("bro_beta_ok")==="1")location.replace("/official");}
       }).then(function(res){
         if(res.status === 429) throw new Error("slow");
         if(!res.ok) throw new Error("bad");
-        form.reset();
-        btn.disabled = false;
-        msg.className = "wform__msg ok";
-        msg.textContent = "you're on the list. we'll reach out when the next wave opens.";
+        // The page visibly changes: form gone, success card in its place.
+        form.hidden = true;
+        var success = document.getElementById("wlSuccess");
+        success.hidden = false;
+        if(email) document.getElementById("wlSuccessMail").hidden = false;
+        success.scrollIntoView({ behavior: "smooth", block: "nearest" });
       }).catch(function(err){
         btn.disabled = false;
         msg.className = "wform__msg err";
