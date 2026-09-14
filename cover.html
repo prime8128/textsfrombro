@@ -118,11 +118,13 @@ try{if(localStorage.getItem("bro_beta_ok")==="1")location.replace("/official");}
   .under{margin:26px 0 0;font-size:13px;color:var(--dim)}
   .under a{color:#B8B8BE}
   .under a:hover{color:#fff}
-  .beta-code-link{
-    display:inline-block;margin-top:10px;font-size:12px;color:var(--dim);
-    background:none;border:none;cursor:pointer;text-decoration:underline;padding:0;font-family:Archivo,var(--sys);
+  .beta-btn{
+    width:100%;margin-top:10px;font-family:Archivo,var(--sys);font-size:14px;font-weight:700;
+    padding:12px 20px;border-radius:100px;cursor:pointer;
+    background:transparent;color:var(--bubble);border:1.5px solid var(--bubble);
+    transition:background .16s ease, color .16s ease;
   }
-  .beta-code-link:hover{color:#B8B8BE}
+  .beta-btn:hover{background:var(--bubble);color:var(--ink)}
 
   /* ---------- the looping thread (lifted from /about, restyled dark) -------- */
   .phone{
@@ -251,9 +253,9 @@ try{if(localStorage.getItem("bro_beta_ok")==="1")location.replace("/official");}
   <div class="hero__copy">
     <h1>Nobody mutes<br>their texts.</h1>
     <p class="pitch">
-      <b>Bro texts you to do the stuff you said you'd do.</b> Tell him your plans in plain
-      English and he texts you at the right moment — a real number in your Messages, right
-      next to everyone else you text. No app to open, no notification to swipe away.
+      <b>Bro texts you to do the stuff you said you'd do.</b> Tell him your plans and he
+      texts you at the right moment, a real number in your Messages, right next to everyone
+      else you text. No app to open, no notification to swipe away.
     </p>
     <p class="beta-line"><i></i>Not open yet — the beta is invite-only.</p>
 
@@ -271,10 +273,10 @@ try{if(localStorage.getItem("bro_beta_ok")==="1")location.replace("/official");}
       <button type="submit" id="wlBtn">Join the waitlist</button>
       <p class="wform__msg" id="wlMsg" role="status" aria-live="polite"></p>
     </form>
+    <button class="beta-btn" id="betaOpen" type="button" style="max-width:440px">Have a beta code?</button>
 
     <p class="under">
-      Want the full story? <a href="/about">See what Bro is and how he works &rarr;</a><br>
-      <button class="beta-code-link" id="betaOpen" type="button">Have a beta code?</button>
+      Want the full story? <a href="/about">See what Bro is and how he works &rarr;</a>
     </p>
   </div>
 
