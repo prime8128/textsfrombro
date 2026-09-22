@@ -2,26 +2,13 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    {
-      "source": "/official",
-      "destination": "/"
-    },
-    {
-      "source": "/api/waitlist",
-      "destination": "https://app.textsfrombro.com/api/waitlist"
-    },
-    {
-      "source": "/api/beta-code",
-      "destination": "https://app.textsfrombro.com/api/beta-code"
-    }
+    { "source": "/official", "destination": "/" },
+    { "source": "/api/waitlist", "destination": "https://app.textsfrombro.com/api/waitlist" },
+    { "source": "/api/beta-code", "destination": "https://app.textsfrombro.com/api/beta-code" },
     { "source": "/go/:path*", "destination": "https://app.textsfrombro.com/go/:path*" },
-{ "source": "/subscribe", "destination": "https://app.textsfrombro.com/subscribe" }
+    { "source": "/subscribe", "destination": "https://app.textsfrombro.com/subscribe" }
   ],
   "redirects": [
-    {
-      "source": "/",
-      "destination": "/cover",
-      "permanent": false
-    }
+    { "source": "/", "destination": "/cover", "permanent": false }
   ]
 }
