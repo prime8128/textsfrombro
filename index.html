@@ -183,33 +183,24 @@
      visible next to the CTA; keep it in sync with /about#join and the A2P
      campaign registration. */
   .optin{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:6px}
-  .optin__intro{font-size:12.5px;color:var(--dim);margin:0 0 10px;line-height:1.45}
-  .optin__intro b{color:#fff;font-weight:600}
-  .optin input[type="tel"],.optin input[type="email"]{
-    width:100%;font-family:var(--sys);font-size:15px;padding:11px 15px;margin-bottom:8px;
-    border:1px solid #2A2A30;border-radius:100px;background:#000;color:#fff;outline:none;
+  .optin__intro{font-size:12.5px;color:var(--dim);margin:0 0 12px;line-height:1.45}
+  .optin__intro b{color:#B8B8BE;font-weight:600}
+  /* Green pill CTA. Overrides the sheet's generic `a` nav styling so the
+     primary action reads as a button, not another menu row. */
+  .sheet a.optin__cta{
+    display:block;text-align:center;background:var(--bubble);color:var(--ink);
+    font-family:var(--sys);font-size:15px;font-weight:700;
+    padding:13px 18px;border-radius:100px;border:none;text-decoration:none;
   }
-  .optin input[type="tel"]:focus,.optin input[type="email"]:focus{border-color:var(--bubble)}
-  .optin__consent{
-    display:flex;gap:9px;align-items:flex-start;margin:10px 0 12px;
-    font-size:10.5px;line-height:1.45;color:var(--dim);cursor:pointer;
-  }
-  .optin__consent input{flex:0 0 auto;width:15px;height:15px;margin:1px 0 0;accent-color:var(--bubble);cursor:pointer}
+  .sheet a.optin__cta:hover{color:var(--ink);filter:brightness(1.06)}
+  /* Disclosure sits under the CTA. Its inline links must stay small — the
+     sheet's `a` rule would otherwise render them as full nav rows. */
+  .optin__consent{font-size:10.5px;color:var(--dim);line-height:1.5;margin:10px 0 0}
   .optin__consent b{color:#B8B8BE;font-weight:600}
-  .optin__consent a{color:#B8B8BE;text-decoration:underline;font-size:10.5px;font-weight:400;
-    display:inline;padding:0;border:none}
-  .optin__actions{display:flex;flex-direction:column;gap:8px}
-  .optin__actions button{
-    font-family:var(--sys);font-size:14px;font-weight:700;
-    padding:11px 18px;border-radius:100px;border:none;cursor:pointer;
+  .sheet .optin__consent a{
+    font-size:10.5px;font-weight:400;color:#B8B8BE;text-decoration:underline;
+    display:inline;padding:0;border:none;
   }
-  #optinBtn{background:var(--bubble);color:var(--ink)}
-  #optinBtn[disabled]{opacity:.5;cursor:default}
-  .optin__ghost{background:transparent;color:var(--dim);border:1px solid #2A2A30 !important}
-  .optin__ghost:hover{color:#fff;border-color:#3A3A40 !important}
-  .optin__msg{font-size:11.5px;margin:8px 0 0;min-height:14px;color:var(--dim)}
-  .optin__msg.ok{color:var(--bubble);font-weight:600}
-  .optin__msg.err{color:#FF6961;font-weight:600}
   .sheet.open{transform:none}
   .sheet h3{font-family:"Archivo Black";font-weight:400;text-transform:uppercase;letter-spacing:-.03em;
     font-size:13px;color:var(--dim);margin:0 0 14px}
@@ -264,18 +255,15 @@
   <h3>Texts From Bro</h3>
 
   <!-- Text-based opt-in. The user sends the first message from their own
-       device; Bro's reply is the opt-in confirmation. No numbers collected
-       here. -->
+       device; Bro's reply is the opt-in confirmation. No numbers collected. -->
   <section class="optin" id="optin" aria-label="Start texting Bro">
     <p class="optin__intro"><b>Want Bro to text you?</b> Tap below and send the message. That's the whole signup.</p>
-    <div class="optin__actions">
-      <a id="sheetCta" href="/about">Text Bro</a>
-    </div>
-    <p class="optin__consent" style="margin-top:10px">
-      <span>Sending that text opts you in to <b>recurring automated reminder texts for the reminders you set yourself</b>.
+    <a class="optin__cta" id="sheetCta" href="/about">Text Bro</a>
+    <p class="optin__consent">
+      Sending that text opts you in to <b>recurring automated reminder texts for the reminders you set yourself</b>.
       Msg frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help.
-      No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. See our
-      <a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms</a>.</span>
+      No mobile information will be shared with third parties or affiliates for marketing or promotional purposes.
+      See our <a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms</a>.
     </p>
   </section>
 
