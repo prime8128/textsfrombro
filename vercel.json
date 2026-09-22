@@ -14,6 +14,8 @@
       "source": "/api/beta-code",
       "destination": "https://app.textsfrombro.com/api/beta-code"
     }
+    { "source": "/go/:path*", "destination": "https://app.textsfrombro.com/go/:path*" },
+{ "source": "/subscribe", "destination": "https://app.textsfrombro.com/subscribe" }
   ],
   "redirects": [
     {
