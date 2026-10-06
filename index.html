@@ -26,6 +26,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <script defer src="/_vercel/insights/script.js"></script>
+<script src="/bro-number.js"></script>
 <style>
   :root{
     --bg:#000000;
@@ -290,12 +291,12 @@
     var ua = navigator.userAgent || "";
     var isApple = /iPad|iPhone|iPod|Macintosh/.test(ua) ||
                   (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-    cta.href = "sms:+16155386888" + (isApple ? "&" : "?") +
+    cta.href = "sms:" + window.BRO_NUMBER + (isApple ? "&" : "?") +
                "body=" + encodeURIComponent("Hey bro, I'm in");
   })();
 
   /* ====== CONFIG ====== */
-  var BRO_NUMBER  = "+16155386888";
+  var BRO_NUMBER  = window.BRO_NUMBER;
   var FIRST_TEXT  = "what's up bro, you ready for today?";
   var OPT_IN_TEXT = "Hey bro, I'm in";
 
