@@ -483,7 +483,7 @@
   </p>
 
   <div class="hero__cta" style="justify-content:center">
-    <a class="btn-lg" id="joinCta" href="#join">Start free</a>
+    <a class="btn-lg" id="joinCta" href="sms:+16155386888">Start free</a>
     <span class="hero__note"><i class="dot"></i>Available in the US and Canada.</span>
   </div>
 
@@ -514,10 +514,12 @@
 
   /* ============ 0. iMESSAGE DEEP LINK ============
      Text-based opt-in: the user sends the message from their own device.
-     The href stays "#join" in the markup so it degrades to the form when
-     JS is off. Apple's Messages wants `&body=`, everyone else `?body=`. */
+     Without JS, joinCta's markup href is the plain sms: link (the one
+     literal copy of the number on this page, pinned equal to bro-number.js
+     by the app repo's plan-catalog test); smsCta falls back to #join. Apple's Messages wants `&body=`, everyone else `?body=`. */
   (function(){
     var BRO_NUMBER  = window.BRO_NUMBER;
+    if(!BRO_NUMBER) return;  // bro-number.js didn't load: keep the markup's links
     var OPT_IN_TEXT = "Hey bro, I'm in";
     var ua = navigator.userAgent || "";
     var isApple = /iPad|iPhone|iPod|Macintosh/.test(ua) ||
