@@ -22,6 +22,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
 <script defer src="/_vercel/insights/script.js"></script>
+<script src="/bro-number.js"></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -482,7 +483,7 @@
   </p>
 
   <div class="hero__cta" style="justify-content:center">
-    <a class="btn-lg" id="joinCta" href="sms:+16155386888">Start free</a>
+    <a class="btn-lg" id="joinCta" href="#join">Start free</a>
     <span class="hero__note"><i class="dot"></i>Available in the US and Canada.</span>
   </div>
 
@@ -516,7 +517,7 @@
      The href stays "#join" in the markup so it degrades to the form when
      JS is off. Apple's Messages wants `&body=`, everyone else `?body=`. */
   (function(){
-    var BRO_NUMBER  = "+16155386888";
+    var BRO_NUMBER  = window.BRO_NUMBER;
     var OPT_IN_TEXT = "Hey bro, I'm in";
     var ua = navigator.userAgent || "";
     var isApple = /iPad|iPhone|iPod|Macintosh/.test(ua) ||
