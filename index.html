@@ -261,7 +261,7 @@
     <p class="optin__intro"><b>Want Bro to text you?</b> Tap below and send the message. That's the whole signup.</p>
     <a class="optin__cta" id="sheetCta" href="/about">Text Bro</a>
     <p class="optin__consent">
-      Sending that text opts you in to <b>recurring automated reminder texts for the reminders you set yourself</b>.
+      Bro is an AI assistant. Sending that text opts you in to <b>recurring automated reminder texts for the reminders you set yourself</b>.
       Msg frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help.
       No mobile information will be shared with third parties or affiliates for marketing or promotional purposes.
       See our <a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms</a>.
@@ -386,7 +386,7 @@
     // Text-based opt-in disclosure. Must stay visible at the call to action.
     var consent = document.createElement("p");
     consent.className = "dock__consent";
-    consent.innerHTML = 'Sending that text opts you in to <b>recurring automated reminder texts ' +
+    consent.innerHTML = 'Bro is an AI assistant. Sending that text opts you in to <b>recurring automated reminder texts ' +
       'for the reminders and habits you set for yourself</b>. Texting is optional and not required ' +
       'to use this site. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to opt ' +
       'out, HELP for help. No mobile information is shared with third parties or affiliates for ' +
@@ -414,12 +414,12 @@
 
   function convReady(){
     broSays("that's what i like to hear", function(){
-      broSays("i'm the friend who texts you to keep you on track with your day. no app needed, just chillin in your messages.", closeOut);
+      broSays("i'm an AI that texts you to keep you on track with your day. no app needed, just chillin in your messages.", closeOut);
     });
   }
 
   function convWhat(){
-    broSays("i'm the friend who texts you to keep you on track with your day. no app needed, just chillin in your messages.", closeOut);
+    broSays("i'm an AI that texts you to keep you on track with your day. no app needed, just chillin in your messages.", closeOut);
   }
 
   function closeOut(){
