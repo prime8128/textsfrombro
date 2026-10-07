@@ -8,10 +8,10 @@
 try{if(localStorage.getItem("bro_beta_ok")==="1")location.replace("/official");}catch(e){}
 </script>
 <title>Texts From Bro</title>
-<meta name="description" content="Bro texts you to do the stuff you said you'd do — from a real number. Beta is invite-only; join the waitlist.">
+<meta name="description" content="I text you to do the stuff you said you'd do, from a real number. Join the waitlist and your first month's on me.">
 
 <meta property="og:title" content="Texts From Bro">
-<meta property="og:description" content="Bro texts you to do the stuff you said you'd do — from a real number. Beta is invite-only; join the waitlist.">
+<meta property="og:description" content="I text you to do the stuff you said you'd do, from a real number. Join the waitlist and your first month's on me.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://textsfrombro.com">
 <meta property="og:image" content="https://textsfrombro.com/og-image.png">
@@ -83,28 +83,33 @@ try{if(localStorage.getItem("bro_beta_ok")==="1")location.replace("/official");}
   }
   .pitch{font-size:16.5px;line-height:1.55;color:#C9C9CF;margin:0;max-width:52ch}
   .pitch b{color:#fff}
-  .beta-line{
-    display:flex;align-items:center;gap:8px;
-    font-size:13.5px;color:var(--bubble);font-weight:600;margin:22px 0 0;
-  }
-  .beta-line i{width:7px;height:7px;border-radius:50%;background:var(--bubble);display:inline-block;
-    box-shadow:0 0 0 0 rgba(48,209,88,.6);animation:pulse 2.2s infinite}
   @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(48,209,88,.5)}70%{box-shadow:0 0 0 8px rgba(48,209,88,0)}100%{box-shadow:0 0 0 0 rgba(48,209,88,0)}}
 
   /* ---------- waitlist form ---------- */
   .wform{margin:26px 0 0;max-width:440px}
-  .wform__head{font-size:15.5px;font-weight:700;color:#fff;margin:0 0 10px}
+  .wform__head{font-size:19px;font-weight:700;color:#fff;margin:0 0 10px;letter-spacing:-.01em}
+  /* The waitlist offer: first friends get month one free. */
+  .offer{
+    display:flex;align-items:center;gap:12px;margin:24px 0 0;max-width:440px;padding:12px 14px;
+    border:1.5px solid var(--bubble);border-radius:16px;background:rgba(48,209,88,.08);
+  }
+  .offer__badge{
+    flex:0 0 auto;font-family:"Archivo Black";font-size:12px;letter-spacing:.04em;text-transform:uppercase;
+    background:var(--bubble);color:var(--ink);padding:7px 10px;border-radius:10px;line-height:1.1;text-align:center;
+  }
+  .offer__text{font-size:14px;line-height:1.45;color:#EDEDEF}
+  .offer__text b{color:#fff}
+  .wform__ai{font-size:12.5px;color:#C9C9CF;margin:12px 0 0;font-weight:600}
+  .wform__notice{font-size:12px;line-height:1.5;color:var(--dim);margin:6px 0 0}
+  .wform__notice a{color:#B8B8BE}
+  /* Honeypot: hidden from people (and screen readers), filled by bots. */
+  .hp{position:absolute!important;left:-10000px!important;width:1px;height:1px;overflow:hidden}
   .wform__region{font-size:12.5px;color:var(--dim);margin:-4px 0 12px}
-  .wform input[type="email"],.wform input[type="tel"]{
+  .wform input[type="email"]{
     width:100%;font-family:Archivo,var(--sys);font-size:16px;padding:14px 18px;margin-bottom:9px;
     border:1px solid #2A2A30;border-radius:100px;background:#0C0C0E;color:#fff;outline:none;
   }
   .wform input:focus{border-color:var(--bubble)}
-  .wform .consent{
-    display:flex;gap:9px;align-items:flex-start;margin:8px 0 14px;
-    font-size:11.5px;line-height:1.5;color:var(--dim);cursor:pointer;text-align:left;
-  }
-  .wform .consent input{flex:0 0 auto;width:15px;height:15px;margin:1px 0 0;accent-color:var(--bubble);cursor:pointer}
   .wform button{
     width:100%;font-family:Archivo,var(--sys);font-size:16px;font-weight:700;
     padding:15px 22px;border-radius:100px;border:none;cursor:pointer;
@@ -173,7 +178,7 @@ try{if(localStorage.getItem("bro_beta_ok")==="1")location.replace("/official");}
   .typing i:nth-child(3){animation-delay:.32s}
   @keyframes blip{0%,60%,100%{opacity:.35;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
 
-  /* ---------- slide-in menu (mirrors index.html, incl. the registered form) - */
+  /* ---------- slide-in menu (links only: /cover collects no phone number) ---------- */
   .scrim{position:fixed;inset:0;background:rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:opacity .3s ease;z-index:40;backdrop-filter:blur(2px)}
   .scrim.open{opacity:1;pointer-events:auto}
   .sheet{
@@ -193,28 +198,6 @@ try{if(localStorage.getItem("bro_beta_ok")==="1")location.replace("/official");}
   .sheet__x{position:absolute;top:calc(env(safe-area-inset-top) + 22px);right:22px;background:none;border:none;color:var(--dim);font-size:26px;cursor:pointer;line-height:1;padding:4px}
   .sheet__x:hover{color:#fff}
 
-  /* The registered opt-in form, verbatim styles from index.html */
-  .optin{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:6px}
-  .optin__intro{font-size:12.5px;color:var(--dim);margin:0 0 10px;line-height:1.45;font-family:var(--sys)}
-  .optin__intro b{color:#fff;font-weight:600}
-  .optin input[type="tel"],.optin input[type="email"]{
-    width:100%;font-family:var(--sys);font-size:15px;padding:11px 15px;margin-bottom:8px;
-    border:1px solid #2A2A30;border-radius:100px;background:#000;color:#fff;outline:none;
-  }
-  .optin input[type="tel"]:focus,.optin input[type="email"]:focus{border-color:var(--bubble)}
-  .optin__consent{display:flex;gap:9px;align-items:flex-start;margin:10px 0 12px;font-size:10.5px;line-height:1.45;color:var(--dim);cursor:pointer;font-family:var(--sys)}
-  .optin__consent input{flex:0 0 auto;width:15px;height:15px;margin:1px 0 0;accent-color:var(--bubble);cursor:pointer}
-  .optin__consent b{color:#B8B8BE;font-weight:600}
-  .optin__consent a{color:#B8B8BE;text-decoration:underline;font-size:10.5px;font-weight:400;display:inline;padding:0;border:none}
-  .optin__actions{display:flex;flex-direction:column;gap:8px}
-  .optin__actions button{font-family:var(--sys);font-size:14px;font-weight:700;padding:11px 18px;border-radius:100px;border:none;cursor:pointer}
-  #optinBtn{background:var(--bubble);color:var(--ink)}
-  #optinBtn[disabled]{opacity:.5;cursor:default}
-  .optin__ghost{background:transparent;color:var(--dim);border:1px solid #2A2A30 !important}
-  .optin__ghost:hover{color:#fff;border-color:#3A3A40 !important}
-  .optin__msg{font-size:11.5px;margin:8px 0 0;min-height:14px;color:var(--dim);font-family:var(--sys)}
-  .optin__msg.ok{color:var(--bubble);font-weight:600}
-  .optin__msg.err{color:#FF6961;font-weight:600}
 
   /* ---------- beta-code modal ---------- */
   .modal-scrim{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;z-index:60;backdrop-filter:blur(3px)}
@@ -256,7 +239,6 @@ try{if(localStorage.getItem("bro_beta_ok")==="1")location.replace("/official");}
   @media (prefers-reduced-motion:reduce){
     .thread--live .b,.thread--live .tstamp{opacity:1;transform:none}
     .typing{display:none!important}
-    .beta-line i{animation:none}
   }
   :focus-visible{outline:2px solid var(--bubble);outline-offset:3px}
 </style>
@@ -272,43 +254,44 @@ try{if(localStorage.getItem("bro_beta_ok")==="1")location.replace("/official");}
 
 <div class="wrap hero">
   <div class="hero__copy">
-    <h1>Nobody mutes<br>their texts.</h1>
+    <h1>What's up,<br>I'm Bro</h1>
     <p class="pitch">
-      <b>Bro texts you to do the stuff you said you'd do.</b> Tell him your plans and he
-      texts you at the right moment, a real number in your Messages, right next to everyone
-      else you text. No app needed, no notification to swipe away.
+      <b>I text you to do the stuff you said you'd do.</b> Tell me your plans and I'll hit you
+      at the right moment, from a real number in your Messages, right next to everyone else
+      you text. No app needed, no notification to swipe away.
     </p>
-    <p class="beta-line"><i></i>Not open yet — the beta is invite-only.</p>
+
+    <div class="offer">
+      <span class="offer__badge">First month<br>free</span>
+      <span class="offer__text"><b>First friends get month one on me.</b> That's you, if you get on the list now. The details come with my launch email.</span>
+    </div>
 
     <form class="wform" id="waitlistForm" novalidate>
       <p class="wform__head">Drop your email to get on the waitlist.</p>
       <p class="wform__region">Available in the US and Canada.</p>
       <input type="email" id="wlEmail" name="email" placeholder="your email"
              autocomplete="email" inputmode="email" aria-label="Email address">
-      <input type="tel" id="wlPhone" name="phone" placeholder="mobile number (optional)"
-             autocomplete="tel" inputmode="tel" aria-label="Mobile number, optional">
-      <label class="consent" for="wlConsent">
-        <input type="checkbox" id="wlConsent" name="consent">
-        <span>OK to text me at this number about my spot in the beta. Optional — email works fine.
-        Msg &amp; data rates may apply. Reply STOP to opt out. See our
-        <a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms</a>.</span>
-      </label>
+      <div class="hp" aria-hidden="true">
+        <label for="wlWebsite">Leave this empty</label>
+        <input type="text" id="wlWebsite" name="website" tabindex="-1" autocomplete="off">
+      </div>
       <button type="submit" id="wlBtn">Join the waitlist</button>
+      <p class="wform__ai">Bro is an AI assistant.</p>
+      <p class="wform__notice">I'll email you to confirm, then again when I launch. Unsubscribe anytime.
+        <a href="/privacy">Privacy Policy</a></p>
       <p class="wform__msg" id="wlMsg" role="status" aria-live="polite"></p>
     </form>
 
-    <!-- Shown to EVERYONE on a 200 — new signup, merge, or repeat. The copy
-         is deliberately true in all three cases; a distinct "already joined"
-         message would break the enumeration safety the API preserves. -->
+    <!-- Shown to EVERYONE on a 200: a new signup or a repeat. The copy is true
+         in both cases; a distinct "already joined" message would tell a stranger
+         whether an email is on the list. -->
     <div class="wsuccess" id="wlSuccess" hidden role="status">
       <h2>You're on the list.</h2>
-      <p>That's it — nothing else to do. Already signed up before? You're still on it,
-      nothing lost.</p>
+      <p>Bet. If you're new here, a note from me is on its way. Already signed up? You're
+      still on it, nothing lost. When I launch, your first month is on me.</p>
       <a class="survey-btn" href="https://tally.so/r/pbQRbJ" target="_blank" rel="noopener">
-        While you wait — tell us what you actually need &rarr;
+        While you wait, tell me what you actually need &rarr;
       </a>
-      <p class="wsuccess__mail" id="wlSuccessMail" hidden>A confirmation email is on its way
-      (first-timers — repeat signups were already confirmed).</p>
     </div>
 
     <button class="beta-btn" id="betaOpen" type="button" style="max-width:440px">Have a beta code?</button>
@@ -364,32 +347,6 @@ try{if(localStorage.getItem("bro_beta_ok")==="1")location.replace("/official");}
   <button class="sheet__x" id="sheetX" aria-label="Close menu">&times;</button>
   <h3>Texts From Bro</h3>
 
-  <!-- Web opt-in path. Two voluntary choices, consent unchecked by default,
-       purpose stated inside the consent label itself. This is the form named
-       in the A2P campaign registration (root URL, these exact two button
-       labels). Copy is kept verbatim in sync with index.html and /about#join.
-       Do not reword without updating the campaign registration first. -->
-  <section class="optin" id="optin" aria-label="Text message signup">
-    <p class="optin__intro"><b>Want Bro to text you?</b> This is optional. You can use the whole site without signing up for texts.</p>
-    <div id="optinWrap">
-      <form id="optinForm" action="https://formspree.io/f/xnjegpnz" method="POST">
-        <input type="tel" id="optinPhone" name="phone" placeholder="your mobile number"
-               autocomplete="tel" inputmode="tel" aria-label="Mobile phone number">
-        <input type="email" id="optinEmail" name="email" placeholder="email (optional)"
-               autocomplete="email" inputmode="email" aria-label="Email address, optional">
-        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
-        <label class="optin__consent" for="optinConsent">
-          <input type="checkbox" id="optinConsent" name="consent" value="yes">
-          <span>Bro is an AI assistant. I agree to receive recurring automated text message reminders from Bro <b>to help me stick to the personal reminders and habits I set for myself</b>, at the number I provided. Consent is optional and is not required to use this website or any part of this service. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. See our <a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms</a>.</span>
-        </label>
-        <div class="optin__actions">
-          <button type="submit" id="optinBtn">Sign up for texts</button>
-          <button type="button" id="optinBrowse" class="optin__ghost">Just browsing, no thanks</button>
-        </div>
-      </form>
-    </div>
-    <p class="optin__msg" id="optinMsg" role="status" aria-live="polite"></p>
-  </section>
 
   <a href="https://app.textsfrombro.com">Log in <span>&rarr;</span></a>
   <a href="/about">What is this? <span>&rarr;</span></a>
@@ -406,53 +363,58 @@ try{if(localStorage.getItem("bro_beta_ok")==="1")location.replace("/official");}
 (function(){
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ===== SOURCE TRACKING (?src=) — load-bearing for signup segmentation ===== */
-  var SRC = "direct";
+  /* ===== WHERE THEY CAME FROM: utm_* (and the older ?src=) plus the referrer, first touch, this tab ===== */
+  var AD = { utmSource: null, utmMedium: null, utmCampaign: null, referrer: null };
   try{
-    var q = new URLSearchParams(location.search).get("src");
-    if(q && /^[a-z0-9_-]{1,32}$/i.test(q)) sessionStorage.setItem("bro_src", q.toLowerCase());
-    SRC = sessionStorage.getItem("bro_src") || "direct";
+    var saved = JSON.parse(sessionStorage.getItem("bro_ad") || "null");
+    if(saved){ AD = saved; }
+    else{
+      var qs = new URLSearchParams(location.search);
+      var clean = function(v){ v = (v || "").trim(); return v ? v.slice(0, 100) : null; };
+      AD.utmSource = clean(qs.get("utm_source")) || clean(qs.get("src"));
+      AD.utmMedium = clean(qs.get("utm_medium"));
+      AD.utmCampaign = clean(qs.get("utm_campaign"));
+      AD.referrer = /^https?:\/\//.test(document.referrer) && document.referrer.indexOf(location.origin) !== 0 ? document.referrer.slice(0, 500) : null;
+      sessionStorage.setItem("bro_ad", JSON.stringify(AD));
+    }
   }catch(e){}
 
-  /* ===== WAITLIST -> POST /api/waitlist (Vercel-proxied to the API) ===== */
+  /* ===== WAITLIST -> POST /api/waitlist-email (Vercel-proxied to the API). Email only: no phone, ever. ===== */
   (function(){
     var form = document.getElementById("waitlistForm");
     var msg  = document.getElementById("wlMsg");
     var btn  = document.getElementById("wlBtn");
     form.addEventListener("submit", function(e){
       e.preventDefault();
-      var email   = document.getElementById("wlEmail").value.trim();
-      var phone   = document.getElementById("wlPhone").value.trim();
-      var consent = document.getElementById("wlConsent").checked;
-      if(!email && !phone){
+      var email = document.getElementById("wlEmail").value.trim();
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
         msg.className = "wform__msg err";
-        msg.textContent = "drop an email or a number so we can reach you.";
+        msg.textContent = "that email doesn't look right. try again?";
         return;
       }
       btn.disabled = true;
       msg.className = "wform__msg";
       msg.textContent = "sending…";
-      var body = { source: SRC, consent: consent };
-      if(email) body.email = email;
-      if(phone) body.phone = phone;
-      fetch("/api/waitlist", {
+      var body = { email: email, website: document.getElementById("wlWebsite").value };
+      for(var k in AD){ if(AD[k]) body[k] = AD[k]; }
+      fetch("/api/waitlist-email", {
         method:"POST", headers:{"content-type":"application/json"},
         body: JSON.stringify(body)
       }).then(function(res){
         if(res.status === 429) throw new Error("slow");
+        if(res.status === 400) throw new Error("email");
         if(!res.ok) throw new Error("bad");
         // The page visibly changes: form gone, success card in its place.
         form.hidden = true;
         var success = document.getElementById("wlSuccess");
         success.hidden = false;
-        if(email) document.getElementById("wlSuccessMail").hidden = false;
         success.scrollIntoView({ behavior: "smooth", block: "nearest" });
       }).catch(function(err){
         btn.disabled = false;
         msg.className = "wform__msg err";
-        msg.textContent = err.message === "slow"
-          ? "easy — too many tries. give it a minute."
-          : "that didn't go through. check the email or number and try again.";
+        msg.textContent = err.message === "slow" ? "easy, too many tries. give it a minute."
+          : err.message === "email" ? "that email doesn't look right. try again?"
+          : "that didn't go through. try again in a sec.";
       });
     });
   })();
@@ -487,51 +449,6 @@ try{if(localStorage.getItem("bro_beta_ok")==="1")location.replace("/official");}
     }
     document.getElementById("betaGo").addEventListener("click", submit);
     input.addEventListener("keydown", function(e){ if(e.key === "Enter") submit(); });
-  })();
-
-  /* ===== MENU OPT-IN FORM (verbatim behavior from index.html) ===== */
-  (function(){
-    var form   = document.getElementById("optinForm");
-    var wrap   = document.getElementById("optinWrap");
-    var msg    = document.getElementById("optinMsg");
-    var btn    = document.getElementById("optinBtn");
-    var browse = document.getElementById("optinBrowse");
-    if(!form) return;
-    browse.addEventListener("click", function(){
-      wrap.style.display = "none";
-      msg.className = "optin__msg";
-      msg.textContent = "all good — no texts. enjoy looking around.";
-    });
-    form.addEventListener("submit", function(e){
-      e.preventDefault();
-      var phone   = document.getElementById("optinPhone").value.trim();
-      var consent = document.getElementById("optinConsent");
-      if(!consent.checked){
-        msg.className = "optin__msg err";
-        msg.textContent = "check the box to agree, or pick 'just browsing'.";
-        return;
-      }
-      if(!phone){
-        msg.className = "optin__msg err";
-        msg.textContent = "add your number so bro knows where to text.";
-        return;
-      }
-      btn.disabled = true;
-      msg.className = "optin__msg";
-      msg.textContent = "sending…";
-      fetch(form.action, {method:"POST", body:new FormData(form), headers:{"Accept":"application/json"}})
-        .then(function(res){
-          if(!res.ok) throw new Error();
-          wrap.style.display = "none";
-          msg.className = "optin__msg ok";
-          msg.textContent = "you're in. bro'll text you when the beta opens.";
-        })
-        .catch(function(){
-          btn.disabled = false;
-          msg.className = "optin__msg err";
-          msg.textContent = "that didn't go through. try again in a sec.";
-        });
-    });
   })();
 
   /* ===== MENU ===== */
