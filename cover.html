@@ -8,10 +8,10 @@
 try{if(localStorage.getItem("bro_beta_ok")==="1")location.replace("/official");}catch(e){}
 </script>
 <title>Texts From Bro</title>
-<meta name="description" content="I text you to do the stuff you said you'd do, from a real number. Join the waitlist and your first month's on me.">
+<meta name="description" content="I text you to do the stuff you said you'd do, from a real number. Join the waitlist.">
 
 <meta property="og:title" content="Texts From Bro">
-<meta property="og:description" content="I text you to do the stuff you said you'd do, from a real number. Join the waitlist and your first month's on me.">
+<meta property="og:description" content="I text you to do the stuff you said you'd do, from a real number. Join the waitlist.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://textsfrombro.com">
 <meta property="og:image" content="https://textsfrombro.com/og-image.png">
@@ -88,17 +88,6 @@ try{if(localStorage.getItem("bro_beta_ok")==="1")location.replace("/official");}
   /* ---------- waitlist form ---------- */
   .wform{margin:26px 0 0;max-width:440px}
   .wform__head{font-size:19px;font-weight:700;color:#fff;margin:0 0 10px;letter-spacing:-.01em}
-  /* The waitlist offer: first friends get month one free. */
-  .offer{
-    display:flex;align-items:center;gap:12px;margin:24px 0 0;max-width:440px;padding:12px 14px;
-    border:1.5px solid var(--bubble);border-radius:16px;background:rgba(48,209,88,.08);
-  }
-  .offer__badge{
-    flex:0 0 auto;font-family:"Archivo Black";font-size:12px;letter-spacing:.04em;text-transform:uppercase;
-    background:var(--bubble);color:var(--ink);padding:7px 10px;border-radius:10px;line-height:1.1;text-align:center;
-  }
-  .offer__text{font-size:14px;line-height:1.45;color:#EDEDEF}
-  .offer__text b{color:#fff}
   .wform__ai{font-size:12.5px;color:#C9C9CF;margin:12px 0 0;font-weight:600}
   .wform__notice{font-size:12px;line-height:1.5;color:var(--dim);margin:6px 0 0}
   .wform__notice a{color:#B8B8BE}
@@ -261,11 +250,6 @@ try{if(localStorage.getItem("bro_beta_ok")==="1")location.replace("/official");}
       you text. No app needed, no notification to swipe away.
     </p>
 
-    <div class="offer">
-      <span class="offer__badge">First month<br>free</span>
-      <span class="offer__text"><b>First friends get month one on me.</b> That's you, if you get on the list now. Either monthly plan, with the code in my launch email. One free month per person. Card required, then $7.99/mo (Bro) or $14.99/mo (Big Bro) unless you cancel.</span>
-    </div>
-
     <form class="wform" id="waitlistForm" novalidate>
       <p class="wform__head">Drop your email to get on the waitlist.</p>
       <p class="wform__region">Available in the US and Canada.</p>
@@ -288,7 +272,7 @@ try{if(localStorage.getItem("bro_beta_ok")==="1")location.replace("/official");}
     <div class="wsuccess" id="wlSuccess" hidden role="status">
       <h2>You're on the list.</h2>
       <p>Bet. If you're new here, a note from me is on its way. Already signed up? You're
-      still on it, nothing lost. When I launch, your first month is on me.</p>
+      still on it, nothing lost.</p>
       <p>Unsubscribed before? Email <a href="mailto:hello@textsfrombro.com">hello@textsfrombro.com</a> and I'll put you back on.</p>
       <a class="survey-btn" href="https://tally.so/r/pbQRbJ" target="_blank" rel="noopener">
         While you wait, tell me what you actually need &rarr;
