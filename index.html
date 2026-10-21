@@ -58,9 +58,6 @@
   }
   .dock__consent b{color:#B8B8BE;font-weight:600}
   .dock__consent a{color:#B8B8BE;text-decoration:underline}
-  .dock__alt{font-size:12px;text-align:center;margin:0;color:var(--dim)}
-  .dock__alt a{color:var(--dim);text-decoration:underline}
-  .dock__alt a:hover{color:#fff}
 
   .app{
     display:flex;flex-direction:column;
@@ -392,11 +389,6 @@
     consent.className = "dock__consent";
     consent.innerHTML = 'Bro is an AI assistant. Sending that text opts you in to <b>recurring automated reminder texts for the reminders you set yourself</b>. Texting is optional and not required to use this site. Msg frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. See our <a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms</a>.';
     box.appendChild(consent);
-
-    var alt = document.createElement("p");
-    alt.className = "dock__alt";
-    alt.innerHTML = '<a href="/about#join">Rather use a form? Sign up here &rarr;</a>';
-    box.appendChild(alt);
 
     dock.appendChild(box);
     requestAnimationFrame(function(){ box.classList.add("show"); });
