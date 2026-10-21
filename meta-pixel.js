@@ -8,6 +8,9 @@ n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
 n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
 document,'script','https://connect.facebook.net/en_US/fbevents.js');
+// BRO-133 follow-up (Oct 21): /about's nav "Start free" (#join) is a hash change, not a real navigation. Without
+// this, the pixel's own SPA tracking sends a second PageView for it. Set before init, per Meta's own instructions.
+fbq.disablePushState = true;
 fbq('set', 'autoConfig', false, '1144988201435478');
 fbq('init', '1144988201435478');
 fbq('track', 'PageView');
