@@ -340,6 +340,8 @@
 
   function clearDock(){ dock.innerHTML = ""; }
 
+  // ChatStart (BRO-133): the first of the two opening taps, once per page load, choice only (Privacy names it).
+  var chatStarted = false;
   function showChoices(options){
     clearDock();
     var box = document.createElement("div");
@@ -349,6 +351,10 @@
       btn.className = "choice";
       btn.textContent = opt.label;
       btn.addEventListener("click", function(){
+        if(opt.pixel && !chatStarted){
+          chatStarted = true;
+          if(window.fbq) fbq('trackCustom', 'ChatStart', {choice: opt.pixel});
+        }
         addRow("me", opt.reply || opt.label);
         clearDock();
         setTimeout(opt.next, reduce ? 160 : 480);
@@ -407,8 +413,8 @@
   function start(){
     broSays(FIRST_TEXT, function(){
       showChoices([
-        { label:"let's go", reply:"let's go", next:convReady },
-        { label:"wait… what are you?", reply:"wait… what are you?", next:convWhat }
+        { label:"let's go", reply:"let's go", next:convReady, pixel:"lets_go" },
+        { label:"wait… what are you?", reply:"wait… what are you?", next:convWhat, pixel:"what_are_you" }
       ]);
     });
   }
