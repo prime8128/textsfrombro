@@ -19,7 +19,7 @@
     {
       "source": "/cover",
       "destination": "/",
-      "permanent": false
+      "permanent": true
     },
     {
       "source": "/official",

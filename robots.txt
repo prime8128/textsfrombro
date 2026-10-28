@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /go/
+Disallow: /subscribe
+Disallow: /api/
+Sitemap: https://textsfrombro.com/sitemap.xml
