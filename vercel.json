@@ -2,29 +2,12 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    {
-      "source": "/api/waitlist",
-      "destination": "https://app.textsfrombro.com/api/waitlist"
-    },
-    {
-      "source": "/go/:path*",
-      "destination": "https://app.textsfrombro.com/go/:path*"
-    },
-    {
-      "source": "/subscribe",
-      "destination": "https://app.textsfrombro.com/subscribe"
-    }
+    { "source": "/api/waitlist-email", "destination": "https://app.textsfrombro.com/api/waitlist-email" },
+    { "source": "/go/:path*", "destination": "https://app.textsfrombro.com/go/:path*" },
+    { "source": "/subscribe", "destination": "https://app.textsfrombro.com/subscribe" }
   ],
   "redirects": [
-    {
-      "source": "/cover",
-      "destination": "/",
-      "permanent": false
-    },
-    {
-      "source": "/official",
-      "destination": "/",
-      "permanent": false
-    }
+    { "source": "/cover", "destination": "/", "permanent": true },
+    { "source": "/official", "destination": "/", "permanent": false }
   ]
 }
