@@ -12,7 +12,8 @@ const section = privacy.slice(gcal, providers);
 pin("privacy: the Limited Use sentence verbatim, with its link",
   section.includes(`<p>Texts From Bro's use and transfer to any other app of information received from Google APIs will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>`));
 pin('privacy: "without asking you first"', section.includes("without asking you first"));
-pin('privacy: "disconnect my calendar"', section.includes('"disconnect my calendar"'));
+pin('privacy: "ask Bro by text"', section.includes("ask Bro by text"));
+pin('privacy: "deleted within an hour after it starts"', section.includes("deleted within an hour after it starts"));
 pin("privacy: Information we collect points at the section",
   privacy.includes(`of your payment card from our payment processor. If you connect Google Calendar, we also collect the calendar information described under "Google Calendar".</p>`));
 const calTerms = /<p>If you connect Google Calendar,[^<]*<\/p>/.exec(terms)?.[0] ?? "";
