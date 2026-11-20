@@ -2,7 +2,6 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/api/waitlist-email", "destination": "https://app.textsfrombro.com/api/waitlist-email" },
     { "source": "/go/:path*", "destination": "https://app.textsfrombro.com/go/:path*" },
     { "source": "/subscribe", "destination": "https://app.textsfrombro.com/subscribe" }
   ],
